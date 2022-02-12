@@ -157,6 +157,10 @@ export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
     // Build some observables…
 
     this.bind('testDisplay', someObservable, 'Default Value')
+    // …other bindings…
+
+    // Finally, wire the main template subscription
+    this.wire()
   }
 }
 ```

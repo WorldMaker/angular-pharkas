@@ -17,7 +17,14 @@ import {
   Subject,
   Subscription,
 } from 'rxjs'
-import { map, mergeAll, share, tap, throttleTime } from 'rxjs/operators'
+import {
+  map,
+  mergeAll,
+  share,
+  subscribeOn,
+  tap,
+  throttleTime,
+} from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
@@ -62,6 +69,8 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
   private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
 
   constructor(private ref: ChangeDetectorRef) {}
+
+  //#region *** Inputs ***
 
   private createInput<T>(name: string): PharkasInput<T> {
     const subject = new ReplaySubject<Observable<T>>()
@@ -148,6 +157,10 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     return input.observable
   }
 
+  //#endregion
+
+  //#region *** Display Bindings ***
+
   /**
    * Get the value of a bindable (template binding)
    * @param name Name of bindable
@@ -224,6 +237,8 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     } as PharkasProp<unknown>)
   }
 
+  //#endregion
+
   /**
    * Bind an observable to an `@Output()`.
    * @param eventEmitter Output
@@ -235,6 +250,8 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
   ) {
     this[subscription].add(observable.subscribe(eventEmitter))
   }
+
+  //#region *** Callbacks ***
 
   /**
    * Create a callback function
@@ -278,14 +295,36 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     throw new Error(`Uncreated callback ${name}`)
   }
 
+  //#endregion
+
+  //#region *** Last Resort Side Effects ***
+
   /**
    * (Last Resort!) Bind an observable to a side effect
    *
-   * **Does not** notify Angular of possible template binding changes
+   * **Does not** notify Angular of possible template binding changes. Does try to schedule to requestAnimationFrame.
    * @param observable Observable
    * @param effect Side effect
    */
   protected bindEffect<T>(
+    observable: Observable<T>,
+    effect: (item: T) => void
+  ) {
+    this[subscription].add(
+      observable.pipe(subscribeOn(animationFrameScheduler)).subscribe({
+        next: effect,
+      })
+    )
+  }
+
+  /**
+   * (Truly the Last Resort!) Bind an observable immediately to a side effect
+   *
+   * **Does not** notify Angular of possible template binding changes.
+   * @param observable Observable
+   * @param effect Side effect
+   */
+  protected bindImmediateEffect<T>(
     observable: Observable<T>,
     effect: (item: T) => void
   ) {
@@ -295,6 +334,8 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
       })
     )
   }
+
+  //#endregion
 
   /**
    * Wire the template (completes default bindings)

@@ -1,5 +1,22 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, isDevMode, OnDestroy } from '@angular/core'
-import { animationFrameScheduler, BehaviorSubject, combineLatest, isObservable, Observable, of, ReplaySubject, Subject, Subscription } from 'rxjs'
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  isDevMode,
+  OnDestroy,
+} from '@angular/core'
+import {
+  animationFrameScheduler,
+  BehaviorSubject,
+  combineLatest,
+  isObservable,
+  Observable,
+  of,
+  ReplaySubject,
+  Subject,
+  Subscription,
+} from 'rxjs'
 import { map, mergeAll, share, tap, throttleTime } from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
@@ -38,7 +55,7 @@ type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
  */
 @Component({
   template: '⚠ Base Component Template',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PharkasComponent<TViewModel> implements OnDestroy {
   private [subscription] = new Subscription()
@@ -54,22 +71,23 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
       name,
       next: (value: T | Observable<T>) => {
         if (bound && isDevMode()) {
-          console.warn(`Rebound input ${name}; rebinding acts as a merge may impact performance or indicate a mistake, good observables don't change`)
+          console.warn(
+            `Rebound input ${name}; rebinding acts as a merge may impact performance or indicate a mistake, good observables don't change`
+          )
         }
         if (isObservable(value)) {
           bound = true
           subject.next(value)
         } else {
           if (isDevMode()) {
-            console.warn(`Non-observable input to ${name}; consider using an Observable`)
+            console.warn(
+              `Non-observable input to ${name}; consider using an Observable`
+            )
           }
           subject.next(of(value))
         }
       },
-      observable: subject.asObservable().pipe(
-        mergeAll(),
-        share()
-      )
+      observable: subject.asObservable().pipe(mergeAll(), share()),
     }
   }
 
@@ -90,7 +108,11 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param name Name of input
    * @param value value
    */
-  protected setInput<P extends keyof TViewModel, T extends TViewModel[P], U extends (T extends Observable<infer V> ? V : T)>(name: P, value: U | Observable<U>) {
+  protected setInput<
+    P extends keyof TViewModel,
+    T extends TViewModel[P],
+    U extends T extends Observable<infer V> ? V : T
+  >(name: P, value: U | Observable<U>) {
     const input = this.getOrCreateInput<U>(name)
     input.next(value)
   }
@@ -101,10 +123,11 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param defaultValue Default value
    * @returns Observable
    */
-  protected useInput<P extends keyof TViewModel, T extends TViewModel[P], U extends (T extends Observable<infer V> ? V : T)>(
-    name: P,
-    defaultValue?: U
-  ): Observable<U> {
+  protected useInput<
+    P extends keyof TViewModel,
+    T extends TViewModel[P],
+    U extends T extends Observable<infer V> ? V : T
+  >(name: P, defaultValue?: U): Observable<U> {
     if (this[props].has(name)) {
       const prop = this[props].get(name) as PharkasProp<U>
       if (prop.type == 'input') {
@@ -148,7 +171,11 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param observable Observable to bind to
    * @param defaultValue Default value
    */
-  protected bind<P extends keyof TViewModel, T extends TViewModel[P]>(name: P, observable: Observable<T>, defaultValue: T) {
+  protected bind<P extends keyof TViewModel, T extends TViewModel[P]>(
+    name: P,
+    observable: Observable<T>,
+    defaultValue: T
+  ) {
     if (this[props].has(name)) {
       throw new Error(`${name} is already bound`)
     }
@@ -158,7 +185,7 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
       name,
       subject,
       observable,
-      immediate: false
+      immediate: false,
     } as PharkasProp<unknown>)
   }
 
@@ -170,20 +197,30 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param observable
    * @param defaultValue
    */
-  protected bindImmediate<P extends keyof TViewModel, T extends TViewModel[P]>(name: P, observable: Observable<T>, defaultValue: T) {
+  protected bindImmediate<P extends keyof TViewModel, T extends TViewModel[P]>(
+    name: P,
+    observable: Observable<T>,
+    defaultValue: T
+  ) {
     if (this[props].has(name)) {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
-    this[subscription].add(observable.pipe(tap({
-      next: () => this.ref.detectChanges()
-    })).subscribe(subject))
+    this[subscription].add(
+      observable
+        .pipe(
+          tap({
+            next: () => this.ref.detectChanges(),
+          })
+        )
+        .subscribe(subject)
+    )
     this[props].set(name, {
       type: 'display',
       name,
       subject,
       observable,
-      immediate: true
+      immediate: true,
     } as PharkasProp<unknown>)
   }
 
@@ -192,7 +229,10 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param eventEmitter Output
    * @param observable Observable
    */
-  protected bindOutput<T>(eventEmitter: EventEmitter<T>, observable: Observable<T>) {
+  protected bindOutput<T>(
+    eventEmitter: EventEmitter<T>,
+    observable: Observable<T>
+  ) {
     this[subscription].add(observable.subscribe(eventEmitter))
   }
 
@@ -201,7 +241,11 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param name Name of callback
    * @returns Callback function
    */
-  protected createCallback<P extends keyof TViewModel, T extends TViewModel[P], U extends (T extends (...args: infer V) => void ? T : never)>(name: P): U {
+  protected createCallback<
+    P extends keyof TViewModel,
+    T extends TViewModel[P],
+    U extends T extends (...args: infer V) => void ? T : never
+  >(name: P): U {
     if (this[props].has(name)) {
       throw new Error(`${name} is already bound`)
     }
@@ -210,7 +254,7 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
       type: 'callback',
       name,
       subject,
-      observable: subject.asObservable()
+      observable: subject.asObservable(),
     } as PharkasProp<unknown>)
     return ((...args: any) => subject.next(args)) as U
   }
@@ -220,7 +264,11 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param name Name of callback
    * @returns Observable
    */
-  protected useCallback<P extends keyof TViewModel, T extends TViewModel[P], U extends (T extends (...args: infer V) => void ? V : never)>(name: P): Observable<U> {
+  protected useCallback<
+    P extends keyof TViewModel,
+    T extends TViewModel[P],
+    U extends T extends (...args: infer V) => void ? V : never
+  >(name: P): Observable<U> {
     const prop = this[props].get(name) as PharkasProp<U>
     if (prop?.type === 'callback') {
       return prop.observable
@@ -237,10 +285,15 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
    * @param observable Observable
    * @param effect Side effect
    */
-  protected bindEffect<T>(observable: Observable<T>, effect: (item: T) => void) {
-    this[subscription].add(observable.subscribe({
-      next: effect
-    }))
+  protected bindEffect<T>(
+    observable: Observable<T>,
+    effect: (item: T) => void
+  ) {
+    this[subscription].add(
+      observable.subscribe({
+        next: effect,
+      })
+    )
   }
 
   /**
@@ -258,7 +311,7 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     }
     if (displays.length) {
       const displayObservable = combineLatest(displays).pipe(
-        map(values => {
+        map((values) => {
           for (let i = 0; i < values.length; i++) {
             subjects[i].next(values[i])
           }
@@ -267,11 +320,13 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
         throttleTime(0, animationFrameScheduler),
         share()
       )
-      this[subscription].add(displayObservable.subscribe({
-        next: () => {
-          this.ref.detectChanges()
-        }
-      }))
+      this[subscription].add(
+        displayObservable.subscribe({
+          next: () => {
+            this.ref.detectChanges()
+          },
+        })
+      )
       return displayObservable
     }
     return of([])

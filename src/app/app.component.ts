@@ -10,9 +10,7 @@ import { PharkasComponent } from 'angular-pharkas'
 })
 export class AppComponent extends PharkasComponent<AppComponent> {
   title = 'pharkas'
-  testing = timer(0, 3).pipe(
-    map(value => `Testing ${value}`)
-  )
+  testing = timer(0, 3).pipe(map((value) => `Testing ${value}`))
 
   handleClick: (data: [MouseEvent]) => void
 
@@ -23,6 +21,8 @@ export class AppComponent extends PharkasComponent<AppComponent> {
 
     const click = this.useCallback('handleClick')
 
-    this.bindEffect(click, ([[mouseEvent]]) => console.log('test component clicked', mouseEvent))
+    this.bindEffect(click, ([[mouseEvent]]) =>
+      console.log('test component clicked', mouseEvent)
+    )
   }
 }

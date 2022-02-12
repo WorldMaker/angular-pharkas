@@ -147,9 +147,7 @@
               "projects/angular-pharkas/tsconfig.lib.json",
               "projects/angular-pharkas/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

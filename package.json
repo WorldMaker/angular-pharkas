@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --production",
+    "build:lib": "ng build --production angular-pharkas",
+    "prettier": "prettier -w .",
+    "prettier:check": "prettier --check .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

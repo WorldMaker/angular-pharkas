@@ -10,6 +10,7 @@ import {
   animationFrameScheduler,
   BehaviorSubject,
   combineLatest,
+  from,
   isObservable,
   Observable,
   of,
@@ -17,10 +18,19 @@ import {
   Subject,
   Subscription,
 } from 'rxjs'
-import { map, mergeAll, share, tap, throttleTime } from 'rxjs/operators'
+import {
+  map,
+  mergeAll,
+  share,
+  subscribeOn,
+  tap,
+  throttleTime,
+} from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
+const state = Symbol('state')
+const pharkas = Symbol('pharkas meta')
 
 interface PharkasInput<T> {
   type: 'input'
@@ -34,6 +44,7 @@ interface PharkasDisplay<T> {
   name: string
   subject: BehaviorSubject<T>
   observable: Observable<T>
+  direct?: boolean // observable is direct from subject
   immediate: boolean
 }
 
@@ -45,6 +56,10 @@ interface PharkasCallback<T> {
 }
 
 type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
+
+interface PharkasComponentState<T> extends Observable<T> {
+  [pharkas]: boolean
+}
 
 /**
  * Pharkas Base Component
@@ -60,8 +75,14 @@ type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
 export class PharkasComponent<TViewModel> implements OnDestroy {
   private [subscription] = new Subscription()
   private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
+  private [state]: WeakMap<
+    PharkasComponentState<unknown>,
+    BehaviorSubject<unknown>
+  > = new WeakMap()
 
   constructor(private ref: ChangeDetectorRef) {}
+
+  //#region *** Inputs ***
 
   private createInput<T>(name: string): PharkasInput<T> {
     const subject = new ReplaySubject<Observable<T>>()
@@ -148,6 +169,10 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     return input.observable
   }
 
+  //#endregion
+
+  //#region *** Display Bindings ***
+
   /**
    * Get the value of a bindable (template binding)
    * @param name Name of bindable
@@ -224,6 +249,8 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     } as PharkasProp<unknown>)
   }
 
+  //#endregion
+
   /**
    * Bind an observable to an `@Output()`.
    * @param eventEmitter Output
@@ -235,6 +262,8 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
   ) {
     this[subscription].add(observable.subscribe(eventEmitter))
   }
+
+  //#region *** Callbacks ***
 
   /**
    * Create a callback function
@@ -278,14 +307,209 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     throw new Error(`Uncreated callback ${name}`)
   }
 
+  //#endregion
+
+  //#region *** Local Component State ***
+
+  /**
+   * Use a bit of local component state
+   * @param defaultValue Default value
+   * @returns State observable
+   */
+  protected useState<T>(defaultValue: T): PharkasComponentState<T> {
+    const subject = new BehaviorSubject<T>(defaultValue)
+    const observable = subject.asObservable() as PharkasComponentState<T>
+    // using the meta symbol for "is bound yet"
+    observable[pharkas] = false
+    // stash the behavior subject for later binding; stash it locally only instead of in the observable to keep local state truly local
+    this[state].set(observable, subject as BehaviorSubject<unknown>)
+    return observable
+  }
+
+  /**
+   * Use a bit of local component state that is also automatically bound to a view property
+   *
+   * Beware this may lead to imperative state leaks. It may indicate a place you don't need intermediate
+   * state and can just bind an observable with a more direct `bind` than a `bindState`.
+   * @param name
+   * @param defaultValue
+   */
+  protected useViewState<P extends keyof TViewModel, T extends TViewModel[P]>(
+    name: P,
+    defaultValue: T
+  ): PharkasComponentState<T> {
+    if (this[props].has(name)) {
+      throw new Error(`${name} is already bound`)
+    }
+    const localState = this.useState(defaultValue)
+    this[props].set(name, {
+      type: 'display',
+      name,
+      subject: this[state].get(localState)!,
+      observable: localState,
+      direct: true,
+      immediate: false,
+    } as PharkasProp<unknown>)
+    return localState
+  }
+
+  /**
+   * Use a bit of local component state that is also automatically immmediatedly bound to a view property
+   *
+   * Beware this may lead to imperative state leaks. It may indicate a place you don't need intermediate
+   * state and can just bind an observable with a more direct `bind` than a `bindState`.
+   * @param name
+   * @param defaultValue
+   */
+  protected useImmediateViewState<
+    P extends keyof TViewModel,
+    T extends TViewModel[P]
+  >(name: P, defaultValue: T): PharkasComponentState<T> {
+    if (this[props].has(name)) {
+      throw new Error(`${name} is already bound`)
+    }
+    const localState = this.useState(defaultValue)
+    const subject = this[state].get(localState)!
+    this[subscription].add(
+      localState
+        .pipe(
+          tap({
+            next: () => this.ref.detectChanges(),
+          })
+        )
+        .subscribe(subject)
+    )
+    this[props].set(name, {
+      type: 'display',
+      name,
+      subject,
+      observable: localState,
+      immediate: true,
+    } as PharkasProp<unknown>)
+    return localState
+  }
+
+  /**
+   * Bind an observable to a State
+   *
+   * Beware of accidental circular bindings, consider `bindStateReducer` for dependent states
+   * @param localState Local component state
+   * @param observable Observable
+   */
+  protected bindState<T>(
+    localState: PharkasComponentState<T>,
+    observable: Observable<T>
+  ) {
+    if (localState[pharkas] && isDevMode()) {
+      console.warn(
+        'State is already bound; consider using bindMultiStateReducer instead'
+      )
+    }
+    const subject = this[state].get(localState)
+    if (subject) {
+      this[subscription].add(observable.subscribe(subject))
+      localState[pharkas] = true
+    } else {
+      throw new Error('Unknown local component state')
+    }
+  }
+
+  /**
+   * Bind an observable to a dependent State
+   *
+   * To help avoid circular bindings, provides a reduction from current state to dependent state
+   * @param localState Local component state
+   * @param observable Observable
+   * @param reducer Reducer of current state, observed value to dependent state
+   */
+  protected bindStateReducer<T, U>(
+    localState: PharkasComponentState<T>,
+    observable: Observable<U>,
+    reducer: (stateValue: T, obsValue: U) => T
+  ) {
+    if (localState[pharkas] && isDevMode()) {
+      console.warn(
+        'State is already bound; consider using a single bindMultiStateReducer instead'
+      )
+    }
+    const subject = this[state].get(localState) as BehaviorSubject<T>
+    if (subject) {
+      this[subscription].add(
+        observable
+          .pipe(map((value) => reducer(subject.value, value)))
+          .subscribe(subject)
+      )
+      localState[pharkas] = true
+    } else {
+      throw new Error('Unknown local component state')
+    }
+  }
+
+  /**
+   * Bind multiple observables to a reduced dependent local component state
+   *
+   * This is your "redux pattern". It's best to prefer to observe lots of small state rather than
+   * one big ball of state, but here's the tool if you need it.
+   * @param localState Local component state
+   * @param observables Observables
+   * @param reducer Reducer of current state, observed value to dependent state
+   */
+  protected bindMultiStateReducer<T, U>(
+    localState: PharkasComponentState<T>,
+    observables: Observable<U>[],
+    reducer: (stateValue: T, obsValue: U) => T
+  ) {
+    if (localState[pharkas] && isDevMode()) {
+      console.warn(
+        'State is already bound; consider using bindMultiStateReducer instead'
+      )
+    }
+    const subject = this[state].get(localState) as BehaviorSubject<T>
+    if (subject) {
+      this[subscription].add(
+        from(observables)
+          .pipe(
+            mergeAll(),
+            map((value) => reducer(subject.value, value))
+          )
+          .subscribe(subject)
+      )
+      localState[pharkas] = true
+    } else {
+      throw new Error('Unknown local component state')
+    }
+  }
+
+  //#endregion
+
+  //#region *** Last Resort Side Effects ***
+
   /**
    * (Last Resort!) Bind an observable to a side effect
    *
-   * **Does not** notify Angular of possible template binding changes
+   * **Does not** notify Angular of possible template binding changes. Does try to schedule to requestAnimationFrame.
    * @param observable Observable
    * @param effect Side effect
    */
   protected bindEffect<T>(
+    observable: Observable<T>,
+    effect: (item: T) => void
+  ) {
+    this[subscription].add(
+      observable.pipe(subscribeOn(animationFrameScheduler)).subscribe({
+        next: effect,
+      })
+    )
+  }
+
+  /**
+   * (Truly the Last Resort!) Bind an observable immediately to a side effect
+   *
+   * **Does not** notify Angular of possible template binding changes.
+   * @param observable Observable
+   * @param effect Side effect
+   */
+  protected bindImmediateEffect<T>(
     observable: Observable<T>,
     effect: (item: T) => void
   ) {
@@ -296,16 +520,18 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     )
   }
 
+  //#endregion
+
   /**
    * Wire the template (completes default bindings)
    * @returns Primary template display observable
    */
   protected wire() {
-    const subjects: BehaviorSubject<unknown>[] = []
+    const subjects: Array<BehaviorSubject<unknown> | null> = []
     const displays: Observable<unknown>[] = []
     for (const prop of this[props].values()) {
       if (prop.type == 'display' && !prop.immediate) {
-        subjects.push(prop.subject)
+        subjects.push(prop.direct ? null : prop.subject)
         displays.push(prop.observable)
       }
     }
@@ -313,7 +539,7 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
       const displayObservable = combineLatest(displays).pipe(
         map((values) => {
           for (let i = 0; i < values.length; i++) {
-            subjects[i].next(values[i])
+            subjects[i]?.next(values[i])
           }
           return values
         }),

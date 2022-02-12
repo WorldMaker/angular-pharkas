@@ -1,21 +1,33 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from "@angular/core"
-import { Observable } from "rxjs"
-import { PharkasComponent } from "angular-pharkas"
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core'
+import { Observable } from 'rxjs'
+import { PharkasComponent } from 'angular-pharkas'
 
 @Component({
   selector: 'app-pharkas-test',
-  template: `<p (click)="handleClick($event)">Hello {{ testDisplay }}</p>`
+  template: `<p (click)="handleClick($event)">Hello {{ testDisplay }}</p>`,
 })
 export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent> {
   // *** Inputs ***
-  @Input() set test(value: string | Observable<string>) { this.setInput('test', value) }
+  @Input() set test(value: string | Observable<string>) {
+    this.setInput('test', value)
+  }
 
   // *** Outputs ***
   @Output() readonly mickey = new EventEmitter<[MouseEvent]>()
 
   // *** Template Bindings ***
-  get testDisplay() { return this.bindable<string>('testDisplay') }
-  get unboundDisplay() { return this.bindable<string>('unboundDisplay') }
+  get testDisplay() {
+    return this.bindable<string>('testDisplay')
+  }
+  get unboundDisplay() {
+    return this.bindable<string>('unboundDisplay')
+  }
 
   // *** Callbacks ***
   handleClick: (e: MouseEvent) => void

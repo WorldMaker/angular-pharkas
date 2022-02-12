@@ -195,3 +195,109 @@ export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
   }
 }
 ```
+
+## Local Component State
+
+The basic local component state pattern:
+
+```ts
+@Component({
+  // …
+})
+export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
+  constructor(ref: ChangeDetectorRef) {
+    super(ref)
+
+    // Build an observable you need to use a local state
+
+    // create the state observable
+    const testState = this.useState('test')
+    this.bindState(testState, someObservable)
+
+    // Use the testState observable to build pipelines, eventually bind it to something…
+  }
+}
+```
+
+It's not a "real" component framework if it doesn't give you fancy state management tools. You
+may not need "State observables" in real world, though! State observables can help with some
+"tricky" use-before-defined pipelines, but in many cases you may be able to find simpler
+observable pipelines and more direct `this.bind()` instead.
+
+These local component state management tools are explicitly for locally manipulated state only.
+(Binds will intentionally not work outside of the current component.) There is intentionally no
+imperative escape hatch here like using a raw `BehaviorSubject<T>`.
+
+In following the Create/Use/Bind pattern, note that binds occur after creation (implicitly via
+`useState`), so beware the risk of creating circular bindings with infinite loops. In part this
+is the reason for state observables to exist, where you have almost circular dependencies, but
+not quite exactly circular dependencies.
+
+Try a bind that takes a Reducer if you directly need the current state to make dependent states.
+
+### "View" States
+
+If you are binding a state directly to the view/template, for instance, for debugging there are
+`this.useViewState()` calls that fit the `get` only `this.bindable()` pattern and serve as the
+bind for those properties, saving you an additional bind (and, under the hood, saving you an
+additional `BehaviorSubject<T>` in memory).
+
+Note that a reliance on `this.useViewState()` may imply that the Observable should just be
+`this.bind()` instead, without the overhead of intermediate "State" observables.
+
+`useState` looks somewhat like React's, but unlike React because we have observables, changes to
+state observables (via `bindState` and friends) do not trigger view updates. You'll get view
+updates when you eventually bind to a template binding. `useViewState` however is such a bind
+and all state changes will trigger Angular change detection checks.
+
+### Dependent States
+
+The "Reducer" set of binds take a reducer involving the current state, the current observation,
+and returns the new state.
+
+The "Reducer" binds are quite convenient and likely a strong reason intermediate "State observables"
+may feel useful.
+
+Keep in mind that any "Reducer" state bind you could also likely build as a more direct observable
+pipeline with an RxJS scan operator.
+
+#### `bindMultiStateReducer`
+
+This is your "I need a redux-like" approach in a box. Merge an array of observables and reduce
+them to a single state.
+
+You may not need this, but it is a familiar looking hammer and their may be a lot of nails in
+your domain.
+
+As with all "state" logic, you can also just build similar pipelines with the right
+combination/merge operators and a scan operator.
+
+## "Last Resort" Side Effects
+
+When all else fails and you absolutely must subscribe to do a side effect:
+
+```ts
+this.bindEffect(observable, (value) => {
+  /* side effect */
+})
+```
+
+`bindEffect` is a last resort when you absolutely must subscribe a side effect to something.
+It's an escape from the comfy observable management of Pharkas. (Though not a true escape
+to imperative code either, Pharkas still manages the subscription on your behalf and any
+escape hatches you build on the class with effects are your problem to manage, Pharkas is
+still not leaking RxJS Subjects here.)
+
+`bindEffect` does not call Angular change detection on its own, and you may need to do it
+manually.
+
+## "Smart" Bindings By Default
+
+By default many Pharkas bindings are scheduled around `requestAnimationFrame`. This helps
+give smoother feeling performance, and avoids Angular's `detectChanges()` work and rerendering
+templates faster than the browser can possibly render them.
+
+Some things you may need to make sure get to the DOM ASAP, such as user inputs when strongly
+managing the DOM. (If you were to build a "push" alternative to Angular's ReactiveForms,
+for instance.) In such cases there are "Immediate" variants of bindings. You may not need them,
+and the defaults should do what you need in most cases.

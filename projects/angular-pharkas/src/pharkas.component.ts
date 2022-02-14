@@ -498,6 +498,13 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     this[subscription].add(
       observable.pipe(subscribeOn(animationFrameScheduler)).subscribe({
         next: effect,
+        error: (error: any) =>
+          console.error('Error in effect observation', error),
+        complete: () => {
+          if (isDevMode()) {
+            console.warn('Effect completed')
+          }
+        },
       })
     )
   }
@@ -516,6 +523,13 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     this[subscription].add(
       observable.subscribe({
         next: effect,
+        error: (error: any) =>
+          console.error('Error in effect observation', error),
+        complete: () => {
+          if (isDevMode()) {
+            console.warn('Effect completed')
+          }
+        },
       })
     )
   }
@@ -550,6 +564,24 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
         displayObservable.subscribe({
           next: () => {
             this.ref.detectChanges()
+          },
+          error: (error: any) => {
+            console.error('Error in template bindings', error)
+            for (const subject of subjects) {
+              if (subject) {
+                subject.error(error)
+              }
+            }
+          },
+          complete: () => {
+            if (isDevMode()) {
+              console.warn('Template bindings completed')
+            }
+            for (const subject of subjects) {
+              if (subject) {
+                subject.complete()
+              }
+            }
           },
         })
       )

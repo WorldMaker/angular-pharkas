@@ -21,8 +21,8 @@ import {
 import {
   map,
   mergeAll,
+  observeOn,
   share,
-  subscribeOn,
   tap,
   throttleTime,
 } from 'rxjs/operators'
@@ -496,7 +496,7 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
     effect: (item: T) => void
   ) {
     this[subscription].add(
-      observable.pipe(subscribeOn(animationFrameScheduler)).subscribe({
+      observable.pipe(observeOn(animationFrameScheduler)).subscribe({
         next: effect,
         error: (error: any) =>
           console.error('Error in effect observation', error),

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { PharkasComponent } from 'angular-pharkas'
+import { PharkasComponent } from './pharkas.component'
 
 @NgModule({
   declarations: [PharkasComponent],

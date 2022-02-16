@@ -13,6 +13,7 @@ import {
   combineLatest,
   from,
   isObservable,
+  merge,
   Observable,
   of,
   ReplaySubject,
@@ -24,6 +25,7 @@ import {
   mergeAll,
   observeOn,
   share,
+  shareReplay,
   tap,
   throttleTime,
 } from 'rxjs/operators'
@@ -109,7 +111,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
           subject.next(of(value))
         }
       },
-      observable: subject.asObservable().pipe(mergeAll(), share()),
+      observable: subject.asObservable().pipe(mergeAll(), shareReplay(1)),
     }
   }
 
@@ -270,7 +272,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     if (this[props].has(name)) {
       throw new Error(`${name} is already bound`)
     }
-    const subject = new Subject()
+    const subject = new ReplaySubject(1)
     this[props].set(name, {
       type: 'callback',
       name,
@@ -362,15 +364,6 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     }
     const localState = this.useState(defaultValue)
     const subject = this[state].get(localState)!
-    this[subscription].add(
-      localState
-        .pipe(
-          tap({
-            next: () => this.ref.detectChanges(),
-          })
-        )
-        .subscribe(subject)
-    )
     this[props].set(name, {
       type: 'display',
       name,
@@ -529,33 +522,37 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   //#endregion
 
   ngOnInit(): void {
-    const subjects: Array<BehaviorSubject<unknown> | null> = []
     const displays: Observable<unknown>[] = []
     for (const prop of this[props].values()) {
-      if (prop.type == 'display' && prop.immediate) {
-        this[subscription].add(
-          prop.observable
-            .pipe(
-              tap({
+      if (prop.type === 'display') {
+        if (prop.immediate) {
+          if (!prop.direct) {
+            this[subscription].add(
+              prop.observable
+                .pipe(
+                  tap({
+                    next: () => this.ref.detectChanges(),
+                  })
+                )
+                .subscribe(prop.subject)
+            )
+          } else {
+            this[subscription].add(
+              prop.subject.subscribe({
                 next: () => this.ref.detectChanges(),
               })
             )
-            .subscribe(prop.subject)
-        )
-      }
-      if (prop.type == 'display' && !prop.immediate) {
-        subjects.push(prop.direct ? null : prop.subject)
-        displays.push(prop.observable)
+          }
+        } else {
+          if (!prop.direct) {
+            this[subscription].add(prop.observable.subscribe(prop.subject))
+          }
+          displays.push(prop.observable)
+        }
       }
     }
     if (displays.length) {
-      const displayObservable = combineLatest(displays).pipe(
-        map((values) => {
-          for (let i = 0; i < values.length; i++) {
-            subjects[i]?.next(values[i])
-          }
-          return values
-        }),
+      const displayObservable = merge(...displays).pipe(
         throttleTime(0, animationFrameScheduler),
         share()
       )
@@ -566,20 +563,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
           },
           error: (error: any) => {
             console.error('Error in template bindings', error)
-            for (const subject of subjects) {
-              if (subject) {
-                subject.error(error)
-              }
-            }
           },
           complete: () => {
             if (isDevMode()) {
               console.warn('Template bindings completed')
-            }
-            for (const subject of subjects) {
-              if (subject) {
-                subject.complete()
-              }
             }
           },
         })

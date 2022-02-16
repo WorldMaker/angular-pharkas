@@ -96,18 +96,14 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       next: (value: T | Observable<T>) => {
         if (bound && isDevMode()) {
           console.warn(
-            `Rebound input ${name}; rebinding acts as a merge may impact performance or indicate a mistake, good observables don't change`
+            `Rebound input ${name}; rebinding acts as a merge and may impact performance or indicate a mistake,
+             if it changes it should be an observable and good observables don't change`
           )
         }
+        bound = true
         if (isObservable(value)) {
-          bound = true
           subject.next(value)
         } else {
-          if (isDevMode()) {
-            console.warn(
-              `Non-observable input to ${name}; consider using an Observable`
-            )
-          }
           subject.next(of(value))
         }
       },

@@ -84,8 +84,8 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
 
   //#region *** Inputs ***
 
-  private createInput<T>(name: string): PharkasInput<T> {
-    const subject = new ReplaySubject<Observable<T>>()
+  private createInput<T>(name: string, defaultValue: T): PharkasInput<T> {
+    const subject = new BehaviorSubject<T>(defaultValue)
     let bound = false
     return {
       type: 'input',
@@ -99,23 +99,27 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
         }
         bound = true
         if (isObservable(value)) {
-          subject.next(value)
+          this[subscription].add(value.subscribe(subject))
         } else {
-          subject.next(of(value))
+          subject.next(value)
         }
       },
-      observable: subject.asObservable().pipe(mergeAll(), shareReplay(1)),
+      observable: subject.asObservable(),
     }
   }
 
-  private getOrCreateInput<T>(name: keyof TViewModel): PharkasInput<T> {
-    let input = this[props].get(name) as PharkasProp<T> | undefined
+  private getOrCreateInput<
+    P extends keyof TViewModel,
+    T extends TViewModel[P],
+    U extends T extends Observable<infer V> ? V : T
+  >(name: P, defaultValue: U): PharkasInput<U> {
+    let input = this[props].get(name) as PharkasProp<U> | undefined
     if (input && input.type === 'input') {
       return input
     } else if (input) {
       throw new Error(`${name} is not an input: ${input.type}`)
     }
-    input = this.createInput<T>(name as string)
+    input = this.createInput<U>(name as string, defaultValue)
     this[props].set(name, input as PharkasInput<unknown>)
     return input
   }
@@ -130,8 +134,14 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     T extends TViewModel[P],
     U extends T extends Observable<infer V> ? V : T
   >(name: P, value: U | Observable<U>) {
-    const input = this.getOrCreateInput<U>(name)
-    input.next(value)
+    const prop = this[props].get(name)
+    if (prop?.type === 'input') {
+      prop.next(value)
+    } else if (prop) {
+      throw new Error(`Tried to setInput on a ${prop.type} property`)
+    } else {
+      console.warn(`Tried to set input on an uncreated input`)
+    }
   }
 
   /**
@@ -144,24 +154,8 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     P extends keyof TViewModel,
     T extends TViewModel[P],
     U extends T extends Observable<infer V> ? V : T
-  >(name: P, defaultValue?: U): Observable<U> {
-    if (this[props].has(name)) {
-      const prop = this[props].get(name) as PharkasProp<U>
-      if (prop.type == 'input') {
-        if (isDevMode()) {
-          console.warn(`Possible multiple uses of input ${name}`)
-        }
-        return (prop as PharkasInput<U>).observable
-      } else {
-        throw new Error(`${name} is not an input: ${prop.type}`)
-      }
-    }
-
-    const input = this.createInput<U>(name as string)
-    this[props].set(name, input as PharkasInput<unknown>)
-    if (defaultValue !== undefined) {
-      input.next(of(defaultValue))
-    }
+  >(name: P, defaultValue: U): Observable<U> {
+    const input = this.getOrCreateInput<P, T, U>(name, defaultValue)
     return input.observable
   }
 

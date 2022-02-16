@@ -81,7 +81,7 @@ export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
   constructor(ref: ChangeDetectorRef) {
     super(ref)
 
-    const testInput = this.useInput('testInput')
+    const testInput = this.useInput('testInput', 'Hello World')
 
     // Use testInput to build observable pipelines…
   }

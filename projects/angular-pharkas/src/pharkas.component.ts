@@ -10,7 +10,6 @@ import {
 import {
   animationFrameScheduler,
   BehaviorSubject,
-  combineLatest,
   from,
   isObservable,
   merge,
@@ -26,7 +25,6 @@ import {
   observeOn,
   share,
   shareReplay,
-  tap,
   throttleTime,
 } from 'rxjs/operators'
 
@@ -47,7 +45,6 @@ interface PharkasDisplay<T> {
   name: string
   subject: BehaviorSubject<T>
   observable: Observable<T>
-  direct?: boolean // observable is direct from subject
   immediate: boolean
 }
 
@@ -204,6 +201,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
+    this[subscription].add(observable.subscribe(subject))
     this[props].set(name, {
       type: 'display',
       name,
@@ -230,6 +228,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
+    this[subscription].add(observable.subscribe(subject))
     this[props].set(name, {
       type: 'display',
       name,
@@ -337,7 +336,6 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       name,
       subject: this[state].get(localState)!,
       observable: localState,
-      direct: true,
       immediate: false,
     } as PharkasProp<unknown>)
     return localState
@@ -518,37 +516,22 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   //#endregion
 
   ngOnInit(): void {
-    const displays: Observable<unknown>[] = []
+    const subjects: Subject<unknown>[] = []
     for (const prop of this[props].values()) {
       if (prop.type === 'display') {
         if (prop.immediate) {
-          if (!prop.direct) {
-            this[subscription].add(
-              prop.observable
-                .pipe(
-                  tap({
-                    next: () => this.ref.detectChanges(),
-                  })
-                )
-                .subscribe(prop.subject)
-            )
-          } else {
-            this[subscription].add(
-              prop.subject.subscribe({
-                next: () => this.ref.detectChanges(),
-              })
-            )
-          }
+          this[subscription].add(
+            prop.subject.subscribe({
+              next: () => this.ref.detectChanges(),
+            })
+          )
         } else {
-          if (!prop.direct) {
-            this[subscription].add(prop.observable.subscribe(prop.subject))
-          }
-          displays.push(prop.observable)
+          subjects.push(prop.subject)
         }
       }
     }
-    if (displays.length) {
-      const displayObservable = merge(...displays).pipe(
+    if (subjects.length) {
+      const displayObservable = merge(...subjects).pipe(
         throttleTime(0, animationFrameScheduler),
         share()
       )

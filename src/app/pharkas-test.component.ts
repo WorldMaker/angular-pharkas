@@ -48,7 +48,7 @@ export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent>
     super(ref)
 
     // Show the test input in testDisplay
-    const testInput = this.useInput('test')
+    const testInput = this.useInput('test', 'World')
     this.bind('testDisplay', testInput, 'World')
 
     // Bind DOM click to Output Mickey via callback handleClick

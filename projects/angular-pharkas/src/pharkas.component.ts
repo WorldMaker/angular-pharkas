@@ -14,19 +14,11 @@ import {
   isObservable,
   merge,
   Observable,
-  of,
   ReplaySubject,
   Subject,
   Subscription,
 } from 'rxjs'
-import {
-  map,
-  mergeAll,
-  observeOn,
-  share,
-  shareReplay,
-  throttleTime,
-} from 'rxjs/operators'
+import { map, mergeAll, observeOn, share, throttleTime } from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
@@ -84,8 +76,14 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
 
   //#region *** Inputs ***
 
-  private createInput<T>(name: string, defaultValue: T): PharkasInput<T> {
-    const subject = new BehaviorSubject<T>(defaultValue)
+  private createInput<T, U extends T>(
+    name: string,
+    defaultValue?: U
+  ): PharkasInput<T> {
+    const subject = new ReplaySubject<T>(1)
+    if (defaultValue !== undefined) {
+      subject.next(defaultValue)
+    }
     let bound = false
     return {
       type: 'input',
@@ -111,15 +109,16 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   private getOrCreateInput<
     P extends keyof TViewModel,
     T extends TViewModel[P],
-    U extends T extends Observable<infer V> ? V : T
-  >(name: P, defaultValue: U): PharkasInput<U> {
+    U extends T extends Observable<infer V> ? V : T,
+    TDefault extends U
+  >(name: P, defaultValue?: TDefault): PharkasInput<U> {
     let input = this[props].get(name) as PharkasProp<U> | undefined
     if (input && input.type === 'input') {
       return input
     } else if (input) {
       throw new Error(`${name} is not an input: ${input.type}`)
     }
-    input = this.createInput<U>(name as string, defaultValue)
+    input = this.createInput<U, TDefault>(name as string, defaultValue)
     this[props].set(name, input as PharkasInput<unknown>)
     return input
   }
@@ -153,9 +152,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   protected useInput<
     P extends keyof TViewModel,
     T extends TViewModel[P],
-    U extends T extends Observable<infer V> ? V : T
-  >(name: P, defaultValue: U): Observable<U> {
-    const input = this.getOrCreateInput<P, T, U>(name, defaultValue)
+    U extends T extends Observable<infer V> ? V : T,
+    TDefault extends U
+  >(name: P, defaultValue?: TDefault): Observable<U> {
+    const input = this.getOrCreateInput<P, T, U, TDefault>(name, defaultValue)
     return input.observable
   }
 
@@ -317,10 +317,11 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
    * @param name
    * @param defaultValue
    */
-  protected useViewState<P extends keyof TViewModel, T extends TViewModel[P]>(
-    name: P,
-    defaultValue: T
-  ): PharkasComponentState<T> {
+  protected useViewState<
+    P extends keyof TViewModel,
+    T extends TViewModel[P],
+    U extends T
+  >(name: P, defaultValue: U): PharkasComponentState<T> {
     if (this[props].has(name)) {
       throw new Error(`${name} is already bound`)
     }
@@ -345,8 +346,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
    */
   protected useImmediateViewState<
     P extends keyof TViewModel,
-    T extends TViewModel[P]
-  >(name: P, defaultValue: T): PharkasComponentState<T> {
+    T extends TViewModel[P],
+    U extends T
+  >(name: P, defaultValue: U): PharkasComponentState<T> {
     if (this[props].has(name)) {
       throw new Error(`${name} is already bound`)
     }

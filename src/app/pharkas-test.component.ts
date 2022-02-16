@@ -57,7 +57,7 @@ export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent>
     this.bindOutput(this.mickey, click)
 
     // Simple "highlighted" toggle state
-    const highlighted = this.useViewState('highlighted', false as boolean)
+    const highlighted = this.useViewState('highlighted', false)
     this.bindStateReducer(highlighted, click, (state) => !state)
 
     // The same "state" logic as highlighted, but directly written as a scan in a bind

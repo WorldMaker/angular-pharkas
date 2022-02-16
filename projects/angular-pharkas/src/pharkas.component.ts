@@ -5,6 +5,7 @@ import {
   EventEmitter,
   isDevMode,
   OnDestroy,
+  OnInit,
 } from '@angular/core'
 import {
   animationFrameScheduler,
@@ -72,7 +73,7 @@ interface PharkasComponentState<T> extends Observable<T> {
   template: '⚠ Base Component Template',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PharkasComponent<TViewModel> implements OnDestroy {
+export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   private [subscription] = new Subscription()
   private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
   private [state]: WeakMap<
@@ -231,15 +232,6 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
-    this[subscription].add(
-      observable
-        .pipe(
-          tap({
-            next: () => this.ref.detectChanges(),
-          })
-        )
-        .subscribe(subject)
-    )
     this[props].set(name, {
       type: 'display',
       name,
@@ -536,14 +528,21 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
 
   //#endregion
 
-  /**
-   * Wire the template (completes default bindings)
-   * @returns Primary template display observable
-   */
-  protected wire() {
+  ngOnInit(): void {
     const subjects: Array<BehaviorSubject<unknown> | null> = []
     const displays: Observable<unknown>[] = []
     for (const prop of this[props].values()) {
+      if (prop.type == 'display' && prop.immediate) {
+        this[subscription].add(
+          prop.observable
+            .pipe(
+              tap({
+                next: () => this.ref.detectChanges(),
+              })
+            )
+            .subscribe(prop.subject)
+        )
+      }
       if (prop.type == 'display' && !prop.immediate) {
         subjects.push(prop.direct ? null : prop.subject)
         displays.push(prop.observable)
@@ -585,9 +584,7 @@ export class PharkasComponent<TViewModel> implements OnDestroy {
           },
         })
       )
-      return displayObservable
     }
-    return of([])
   }
 
   ngOnDestroy() {

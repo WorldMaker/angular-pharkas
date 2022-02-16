@@ -70,8 +70,6 @@ export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent>
     // Dumb console log test of handleClick
     this.bindEffect(click, ([mouseEvent]) => console.log('clicked', mouseEvent))
 
-    this.wire()
-
     console.log(this)
   }
 }

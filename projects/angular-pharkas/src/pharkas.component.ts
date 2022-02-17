@@ -53,6 +53,17 @@ interface PharkasComponentState<T> extends Observable<T> {
   [pharkas]: boolean
 }
 
+function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
+  // Zone's monkey patching of RxJS breaks the obvious binding (observable.subscribe(subject))
+  // as RxJS doesn't think it "safe" so we need to do this the hard way to support migrating
+  // out of Zone apps
+  return observable.subscribe({
+    next: (value: T) => subject.next(value),
+    error: (err: any) => subject.error(err),
+    complete: () => subject.complete(),
+  })
+}
+
 /**
  * Pharkas Base Component
  *
@@ -97,7 +108,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
         }
         bound = true
         if (isObservable(value)) {
-          this[subscription].add(value.subscribe(subject))
+          this[subscription].add(bindSubject(value, subject))
         } else {
           subject.next(value)
         }
@@ -195,7 +206,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
-    this[subscription].add(observable.subscribe(subject))
+    this[subscription].add(bindSubject(observable, subject))
     this[props].set(name, {
       type: 'display',
       name,
@@ -222,7 +233,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
-    this[subscription].add(observable.subscribe(subject))
+    this[subscription].add(bindSubject(observable, subject))
     this[props].set(name, {
       type: 'display',
       name,
@@ -243,7 +254,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     eventEmitter: EventEmitter<T>,
     observable: Observable<T>
   ) {
-    this[subscription].add(observable.subscribe(eventEmitter))
+    this[subscription].add(bindSubject(observable, eventEmitter))
   }
 
   //#region *** Callbacks ***
@@ -382,7 +393,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     }
     const subject = this[state].get(localState)
     if (subject) {
-      this[subscription].add(observable.subscribe(subject))
+      this[subscription].add(bindSubject(observable, subject))
       localState[pharkas] = true
     } else {
       throw new Error('Unknown local component state')
@@ -410,9 +421,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     const subject = this[state].get(localState) as BehaviorSubject<T>
     if (subject) {
       this[subscription].add(
-        observable
-          .pipe(map((value) => reducer(subject.value, value)))
-          .subscribe(subject)
+        bindSubject(
+          observable.pipe(map((value) => reducer(subject.value, value))),
+          subject
+        )
       )
       localState[pharkas] = true
     } else {
@@ -442,12 +454,13 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     const subject = this[state].get(localState) as BehaviorSubject<T>
     if (subject) {
       this[subscription].add(
-        from(observables)
-          .pipe(
+        bindSubject(
+          from(observables).pipe(
             mergeAll(),
             map((value) => reducer(subject.value, value))
-          )
-          .subscribe(subject)
+          ),
+          subject
+        )
       )
       localState[pharkas] = true
     } else {
@@ -512,7 +525,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   //#endregion
 
   ngOnInit(): void {
-    const subjects: Subject<unknown>[] = []
+    const observables: Observable<unknown>[] = []
     for (const prop of this[props].values()) {
       if (prop.type === 'display') {
         if (prop.immediate) {
@@ -522,12 +535,12 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
             })
           )
         } else {
-          subjects.push(prop.subject)
+          observables.push(prop.subject.asObservable())
         }
       }
     }
-    if (subjects.length) {
-      const displayObservable = merge(...subjects).pipe(
+    if (observables.length) {
+      const displayObservable = merge(...observables).pipe(
         throttleTime(0, animationFrameScheduler),
         share()
       )

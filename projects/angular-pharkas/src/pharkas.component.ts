@@ -18,7 +18,7 @@ import {
   Subject,
   Subscription,
 } from 'rxjs'
-import { map, mergeAll, observeOn, share, throttleTime } from 'rxjs/operators'
+import { debounceTime, map, mergeAll, observeOn, share } from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
@@ -374,7 +374,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     }
     if (observables.length) {
       const displayObservable = merge(...observables).pipe(
-        throttleTime(0, animationFrameScheduler),
+        debounceTime(0, animationFrameScheduler),
         share()
       )
       this[subscription].add(

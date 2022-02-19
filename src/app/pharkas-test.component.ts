@@ -37,9 +37,6 @@ export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent>
   get highlighted() {
     return this.bindable<boolean>('highlighted')
   }
-  get highlighted2() {
-    return this.bindable<boolean>('highlighted2')
-  }
 
   // *** Callbacks ***
   handleClick: (e: MouseEvent) => void
@@ -56,13 +53,9 @@ export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent>
     const click = this.useCallback('handleClick')
     this.bindOutput(this.mickey, click)
 
-    // Simple "highlighted" toggle state
-    const highlighted = this.useViewState('highlighted', false)
-    this.bindStateReducer(highlighted, click, (state) => !state)
-
-    // The same "state" logic as highlighted, but directly written as a scan in a bind
+    // Simple "state" logic to toggle a highlight on click
     this.bind(
-      'highlighted2',
+      'highlighted',
       click.pipe(scan((acc) => !acc, false as boolean)),
       false
     )

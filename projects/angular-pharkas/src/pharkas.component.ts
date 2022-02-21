@@ -22,7 +22,6 @@ import { debounceTime, map, mergeAll, observeOn, share } from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
-const state = Symbol('state')
 const pharkas = Symbol('pharkas meta')
 
 interface PharkasInput<T> {
@@ -49,10 +48,6 @@ interface PharkasCallback<T> {
 
 type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
 
-interface PharkasComponentState<T> extends Observable<T> {
-  [pharkas]: boolean
-}
-
 function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
   // Zone's monkey patching of RxJS breaks the obvious binding (observable.subscribe(subject))
   // as RxJS doesn't think it "safe" so we need to do this the hard way to support migrating
@@ -78,10 +73,6 @@ function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
 export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   private [subscription] = new Subscription()
   private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
-  private [state]: WeakMap<
-    PharkasComponentState<unknown>,
-    BehaviorSubject<unknown>
-  > = new WeakMap()
 
   constructor(private ref: ChangeDetectorRef) {}
 

@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --configuration=production",
     "build:lib": "ng build --configuration=production angular-pharkas",
-    "typedoc:md": "typedoc --plugin typedoc-plugin-markdown --out docs projects/angular-pharkas/src/public-api.ts",
+    "typedoc:md": "typedoc --plugin typedoc-plugin-markdown --out docs projects/angular-pharkas/src/public-api.ts --cleanOutputDir false --excludePrivate",
     "prettier": "prettier -w .",
     "prettier:check": "prettier --check .",
     "test": "ng test",

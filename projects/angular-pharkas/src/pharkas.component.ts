@@ -10,7 +10,6 @@ import {
 import {
   animationFrameScheduler,
   BehaviorSubject,
-  from,
   isObservable,
   merge,
   Observable,
@@ -18,7 +17,7 @@ import {
   Subject,
   Subscription,
 } from 'rxjs'
-import { debounceTime, map, mergeAll, observeOn, share } from 'rxjs/operators'
+import { debounceTime, observeOn, share } from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
@@ -48,6 +47,12 @@ interface PharkasCallback<T> {
 
 type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
 
+interface PharkasMeta {
+  templateError: boolean
+  immediateTemplateError: boolean
+  effectError: boolean
+}
+
 function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
   // Zone's monkey patching of RxJS breaks the obvious binding (observable.subscribe(subject))
   // as RxJS doesn't think it "safe" so we need to do this the hard way to support migrating
@@ -73,6 +78,53 @@ function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
 export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   private [subscription] = new Subscription()
   private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
+  private [pharkas]: PharkasMeta = {
+    effectError: false,
+    immediateTemplateError: false,
+    templateError: false,
+  }
+
+  //#region *** Blinkenlights ***
+
+  /**
+   * An error has been observed in any observable applied to `bind`, `bindImmediate`,
+   * `bindEffect`, or `bindEffectImmediate`.
+   */
+  public get pharkasError() {
+    return (
+      this[pharkas].templateError ||
+      this[pharkas].immediateTemplateError ||
+      this[pharkas].effectError
+    )
+  }
+  /**
+   * An error has been observed in any observable applied to `bindEffect` or
+   * `bindEffectImmediate`.
+   */
+  public get pharkasEffectError() {
+    return this[pharkas].effectError
+  }
+  /**
+   * An error has been observed in any observable applied to `bind`. Change detection
+   * has *stopped* for all `bind` bound template observables.
+   */
+  public get pharkasTemplateStopped() {
+    return this[pharkas].templateError
+  }
+  /**
+   * An error has been observed in any observable applied to `bindImmediate`.
+   */
+  public get pharkasImmediateTemplateError() {
+    return this[pharkas].immediateTemplateError
+  }
+  /**
+   * An error has been observed in any observable applied to `bind` or `bindImmediate`.
+   */
+  public get pharkasTemplateError() {
+    return this[pharkas].templateError || this[pharkas].immediateTemplateError
+  }
+
+  //#endregion
 
   constructor(private ref: ChangeDetectorRef) {}
 
@@ -310,8 +362,11 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     this[subscription].add(
       observable.pipe(observeOn(animationFrameScheduler)).subscribe({
         next: effect,
-        error: (error: any) =>
-          console.error('Error in effect observation', error),
+        error: (error: any) => {
+          console.error('Error in effect observation', error)
+          this[pharkas].effectError = true
+          this.ref.detectChanges()
+        },
         complete: () => {
           if (isDevMode()) {
             console.warn('Effect completed')
@@ -335,8 +390,11 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     this[subscription].add(
       observable.subscribe({
         next: effect,
-        error: (error: any) =>
-          console.error('Error in effect observation', error),
+        error: (error: any) => {
+          console.error('Error in effect observation', error)
+          this[pharkas].effectError = true
+          this.ref.detectChanges()
+        },
         complete: () => {
           if (isDevMode()) {
             console.warn('Effect completed')
@@ -356,6 +414,21 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
           this[subscription].add(
             prop.subject.subscribe({
               next: () => this.ref.detectChanges(),
+              error: (error) => {
+                console.error(
+                  `Error in immediate template binding "${prop.name}"`,
+                  error
+                )
+                this[pharkas].immediateTemplateError = true
+                this.ref.detectChanges()
+              },
+              complete: () => {
+                if (isDevMode()) {
+                  console.warn(
+                    `Immediate template binding "${prop.name}" completed`
+                  )
+                }
+              },
             })
           )
         } else {
@@ -375,6 +448,8 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
           },
           error: (error: any) => {
             console.error('Error in template bindings', error)
+            this[pharkas].templateError = true
+            this.ref.detectChanges()
           },
           complete: () => {
             if (isDevMode()) {

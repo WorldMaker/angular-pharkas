@@ -152,6 +152,23 @@ managing the DOM. (If you were to build a "push" alternative to Angular's Reacti
 for instance.) In such cases there are "Immediate" variants of bindings. You may not need them,
 and the defaults should do what you need in most cases.
 
+### Error Blinkenlights
+
+Pharkas provides a set of blinkenlights (lights intended to blink a status) for very basic error
+status indication. These are "last chance error reporting" blinkenlights for generic error
+situations when any observable provided to `bind` or `bindEffect` or an "Immediate" variant of
+such has thrown an error.
+
+`pharkasTemplateStopped` in particular signals that a component has effectively _stopped_ updating just
+about entirely as Pharkas will stop notifying Angular Change Detection when it raises
+`pharkasTemplateStopped` during observation of an error from the combined change detection observable
+for non-"Immediate" observables.
+
+It is encouraged to move error detection and avoidance strategies such as retries up into your
+observable pipelines themselves, but sometimes you need a last chance way to detect that the
+worst has happened, the component may be stopped/stuck, and in that case render some sort of
+frowny face 😟.
+
 ## Callbacks
 
 Callbacks are very useful for everything from consuming output bindings of other Angular controls to

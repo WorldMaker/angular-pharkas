@@ -64,6 +64,25 @@ function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
   })
 }
 
+function bindInputSubject<T>(
+  name: string,
+  observable: Observable<T>,
+  subject: Subject<T>,
+  isRebound: boolean
+) {
+  // Input behavior should be a merge, and inputs should not likely complete in the lifespan
+  // of the component, so ignore (but warn) input observable completion
+  return observable.subscribe({
+    next: (value: T) => subject.next(value),
+    error: (err: any) => subject.error(err),
+    complete: () => {
+      if (isDevMode() && !isRebound) {
+        console.warn(`Input ${name} completed`)
+      }
+    },
+  })
+}
+
 /**
  * Pharkas Base Component
  *
@@ -149,12 +168,12 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
              if it changes it should be an observable and good observables don't change`
           )
         }
-        bound = true
         if (isObservable(value)) {
-          this[subscription].add(bindSubject(value, subject))
+          this[subscription].add(bindInputSubject(name, value, subject, bound))
         } else {
           subject.next(value)
         }
+        bound = true
       },
       observable: subject.asObservable(),
     }

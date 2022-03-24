@@ -87,3 +87,43 @@ export class MyExample extends PharkasComponent<MyExample> {
 
 !> Beware this is obviously a circular loop and dangerous. This is not Pharkas' fault, but
 Angular's.
+
+## Destroying things the RxJS way
+
+The README states:
+
+> the last `ngOnDestroy` you'll ever need is the automatic one in the BaseComponent
+
+This sounds like hyperbole, but you don't need `ngOnDestroy` when working entirely with
+Observables. RxJS natively has the concept of a finalizer when observables are unsubscribed.
+
+When you are working with, for instance, vanilla JS libraries it's often best to wrap setup
+and cleanup in an observable. The easiest way is to use the `new Observable` constructor
+which is designed for this.
+
+```ts
+const vanillaJsDependency = new Observable<VanillaJsType>((observer) => {
+  const vanillaComponent = new VanillaJsType()
+  try {
+    vanillaComponent.setup()
+    observer.next(vanillaComponent)
+  } catch (error) {
+    observer.error(error)
+  }
+
+  return () => vanillaComponent.teardown()
+})
+
+// use vanillaJsDependency in pipelines as appropriate, such as bindEffect pipelines
+```
+
+An alternative in rare cases where wrapping both setup and teardown into the same observable
+in some cases may be to use the `finalize` operator from RxJS in a pipeline to schedule a
+finalizer callback.
+
+In both cases of finalizer, as long as all relevant pipelines are bound _somehow_
+(again, most likely with things that need finalizers in `bindEffect` bindings), everything
+should get cleaned up on unsubscribe, which will be called automatically by the base component's
+`ngOnDestroy`.
+
+No need to override `ngOnDestroy` ever, just use finalizers in your RxJS pipelines.

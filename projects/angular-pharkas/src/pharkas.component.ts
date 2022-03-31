@@ -83,6 +83,33 @@ function bindInputSubject<T>(
   })
 }
 
+function bindTemplateSubject<T>(
+  name: string,
+  observable: Observable<T>,
+  subject: Subject<T>
+) {
+  // Template behavior should ignore errors because throwing errors in template variable getters
+  // causes Angular to just give up and fallbacks like `pharkasTemplateStopped` don't work.
+  // Because we already have fallbacks like `pharkasTemplateStopped` we can just ignore errors
+  // now. Because the general warning doesn't know which specific template variables are
+  // affected, we can add specific warnings here.
+  return observable.subscribe({
+    next: (value: T) => subject.next(value),
+    error: (err: any) => {
+      if (isDevMode()) {
+        console.warn(`Template binding ${name} error`, err)
+      }
+      // do nothing
+    },
+    complete: () => {
+      if (isDevMode()) {
+        console.warn(`Template binding ${name} completed`)
+      }
+      subject.complete()
+    },
+  })
+}
+
 /**
  * Pharkas Base Component
  *
@@ -268,7 +295,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
-    this[subscription].add(bindSubject(observable, subject))
+    this[subscription].add(
+      bindTemplateSubject(name.toString(), observable, subject)
+    )
     this[props].set(name, {
       type: 'display',
       name,
@@ -295,7 +324,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       throw new Error(`${name} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
-    this[subscription].add(bindSubject(observable, subject))
+    this[subscription].add(
+      bindTemplateSubject(name.toString(), observable, subject)
+    )
     this[props].set(name, {
       type: 'display',
       name,

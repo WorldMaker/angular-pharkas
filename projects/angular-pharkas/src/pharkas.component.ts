@@ -48,8 +48,7 @@ interface PharkasCallback<T> {
 type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
 
 interface PharkasMeta {
-  templateError: boolean
-  immediateTemplateError: boolean
+  templateError: BehaviorSubject<boolean>
   effectError: boolean
 }
 
@@ -86,7 +85,8 @@ function bindInputSubject<T>(
 function bindTemplateSubject<T>(
   name: string,
   observable: Observable<T>,
-  subject: Subject<T>
+  subject: Subject<T>,
+  meta: PharkasMeta
 ) {
   // Template behavior should ignore errors because throwing errors in template variable getters
   // causes Angular to just give up and fallbacks like `pharkasTemplateStopped` don't work.
@@ -99,7 +99,7 @@ function bindTemplateSubject<T>(
       if (isDevMode()) {
         console.warn(`Template binding ${name} error`, err)
       }
-      // do nothing
+      meta.templateError.next(true)
     },
     complete: () => {
       if (isDevMode()) {
@@ -126,8 +126,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
   private [pharkas]: PharkasMeta = {
     effectError: false,
-    immediateTemplateError: false,
-    templateError: false,
+    templateError: new BehaviorSubject<boolean>(false),
   }
 
   //#region *** Blinkenlights ***
@@ -137,11 +136,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
    * `bindEffect`, or `bindEffectImmediate`.
    */
   public get pharkasError() {
-    return (
-      this[pharkas].templateError ||
-      this[pharkas].immediateTemplateError ||
-      this[pharkas].effectError
-    )
+    return this[pharkas].templateError.value || this[pharkas].effectError
   }
   /**
    * An error has been observed in any observable applied to `bindEffect` or
@@ -151,23 +146,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     return this[pharkas].effectError
   }
   /**
-   * An error has been observed in any observable applied to `bind`. Change detection
-   * has *stopped* for all `bind` bound template observables.
-   */
-  public get pharkasTemplateStopped() {
-    return this[pharkas].templateError
-  }
-  /**
-   * An error has been observed in any observable applied to `bindImmediate`.
-   */
-  public get pharkasImmediateTemplateError() {
-    return this[pharkas].immediateTemplateError
-  }
-  /**
    * An error has been observed in any observable applied to `bind` or `bindImmediate`.
    */
   public get pharkasTemplateError() {
-    return this[pharkas].templateError || this[pharkas].immediateTemplateError
+    return this[pharkas].templateError.value
   }
 
   //#endregion
@@ -296,7 +278,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     }
     const subject = new BehaviorSubject(defaultValue)
     this[subscription].add(
-      bindTemplateSubject(name.toString(), observable, subject)
+      bindTemplateSubject(name.toString(), observable, subject, this[pharkas])
     )
     this[props].set(name, {
       type: 'display',
@@ -325,7 +307,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     }
     const subject = new BehaviorSubject(defaultValue)
     this[subscription].add(
-      bindTemplateSubject(name.toString(), observable, subject)
+      bindTemplateSubject(name.toString(), observable, subject, this[pharkas])
     )
     this[props].set(name, {
       type: 'display',
@@ -457,7 +439,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   //#endregion
 
   ngOnInit(): void {
-    const observables: Observable<unknown>[] = []
+    const observables: Observable<unknown>[] = [
+      this[pharkas].templateError.asObservable(),
+    ]
     for (const prop of this[props].values()) {
       if (prop.type === 'display') {
         if (prop.immediate) {
@@ -469,7 +453,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
                   `Error in immediate template binding "${prop.name}"`,
                   error
                 )
-                this[pharkas].immediateTemplateError = true
+                this[pharkas].templateError.next(true)
                 this.ref.detectChanges()
               },
               complete: () => {
@@ -498,7 +482,6 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
           },
           error: (error: any) => {
             console.error('Error in template bindings', error)
-            this[pharkas].templateError = true
             this.ref.detectChanges()
           },
           complete: () => {

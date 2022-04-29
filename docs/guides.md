@@ -30,7 +30,7 @@ At which point you bind them as you would expect following the usual patterns:
 })
 export class MyExample extends PharkasComponent<MyExample> {
   get test { return this.bindable<string>('test') }
-  handleTestChange: (value: string) => void
+  readonly handleTestChange: (value: string) => void
 
   constructor(ref: ChangeDetectorRef) {
     super(ref)

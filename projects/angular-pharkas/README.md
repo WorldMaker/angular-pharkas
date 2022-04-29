@@ -177,7 +177,7 @@ The callback pattern:
 })
 export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
   // Type only, no implementation:
-  testCallback: (e: MouseEvent, somethingElse: string) => void
+  readonly testCallback: (e: MouseEvent, somethingElse: string) => void
 
   constructor(ref: ChangeDetectorRef) {
     super(ref)

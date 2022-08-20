@@ -198,7 +198,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     if (input && input.type === 'input') {
       return input
     } else if (input) {
-      throw new Error(`${name} is not an input: ${input.type}`)
+      throw new Error(`${name.toString()} is not an input: ${input.type}`)
     }
     input = this.createInput<U, TDefault>(name as string, defaultValue)
     this[props].set(name, input as PharkasInput<unknown>)
@@ -255,9 +255,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     if (prop?.type === 'display') {
       return prop.subject.value
     } else if (prop) {
-      throw new Error(`${name} is bound as ${prop.type}`)
+      throw new Error(`${name.toString()} is bound as ${prop.type}`)
     }
-    throw new Error(`Unbound ${name}`)
+    throw new Error(`Unbound ${name.toString()}`)
   }
 
   /**
@@ -274,7 +274,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     defaultValue: T
   ) {
     if (this[props].has(name)) {
-      throw new Error(`${name} is already bound`)
+      throw new Error(`${name.toString()} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
     this[subscription].add(
@@ -303,7 +303,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     defaultValue: T
   ) {
     if (this[props].has(name)) {
-      throw new Error(`${name} is already bound`)
+      throw new Error(`${name.toString()} is already bound`)
     }
     const subject = new BehaviorSubject(defaultValue)
     this[subscription].add(
@@ -345,7 +345,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     U extends T extends (...args: infer V) => void ? T : never
   >(name: P): U {
     if (this[props].has(name)) {
-      throw new Error(`${name} is already bound`)
+      throw new Error(`${name.toString()} is already bound`)
     }
     const subject = new ReplaySubject(1)
     this[props].set(name, {
@@ -371,9 +371,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     if (prop?.type === 'callback') {
       return prop.observable
     } else if (prop) {
-      throw new Error(`${name} is bound as ${prop.type}`)
+      throw new Error(`${name.toString()} is bound as ${prop.type}`)
     }
-    throw new Error(`Uncreated callback ${name}`)
+    throw new Error(`Uncreated callback ${name.toString()}`)
   }
 
   //#endregion

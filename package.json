@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~13.3.11",
     "@angular/router": "~13.3.11",
     "@types/eslint": "^8.4.6",
+    "@types/estree": "^1.0.0",
     "eslint": "^8.22.0",
     "prettier": "^2.5.1",
     "rxjs": "~6.6.0",

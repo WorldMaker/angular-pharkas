@@ -22,6 +22,13 @@ The `angular-pharkas` library is a wild, frontier pharmacist approach to buildin
 
 It is inspired by ReactiveUI (.NET), the Hooks of React, and rx-angular, but it is also none of those.
 
+## The Inevitable Angular Compatibility Chart
+
+| Pharkas version | Supported Angular |
+| --------------- | ----------------- |
+| 4.0.0           | Angular 13        |
+| <=3.0.0         | Angular 11        |
+
 ## Start a Component
 
 A basic empty component starts like this:

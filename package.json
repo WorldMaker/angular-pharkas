@@ -36,7 +36,6 @@
     "@angular-eslint/template-parser": "13.5.0",
     "@angular/cli": "~13.3.9",
     "@angular/compiler-cli": "~13.3.11",
-    "@briebug/jest-schematic": "^4.0.0",
     "@types/eslint": "^8.4.6",
     "@types/estree": "^1.0.0",
     "@types/jest": "latest",

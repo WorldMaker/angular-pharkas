@@ -30,7 +30,7 @@ describe('works as documented in README', () => {
       constructor(ref: ChangeDetectorRef) {
         super(ref)
 
-        const testInput = this.useInput('testInput', 'Hello World')
+        const testInput = this.useInput('testInput')
 
         // Use testInput to build observable pipelines…
       }
@@ -59,6 +59,44 @@ describe('works as documented in README', () => {
 
     const exampleInstance = new MyExampleComponent(null!)
     expect(exampleInstance).toBeTruthy()
+  })
+
+  it('can have an input with service class default', () => {
+    class SomeService {
+      readonly getSomeObservable = jest.fn(() => of('Hello World'))
+    }
+
+    class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
+      @Input() set testInput(value: Observable<string>) {
+        this.setInput('testInput', value)
+      }
+
+      get test() {
+        return this.bindable<string>('test')
+      }
+
+      constructor(ref: ChangeDetectorRef, service: SomeService) {
+        super(ref)
+
+        const testInput = this.useInput('testInput', () =>
+          service.getSomeObservable()
+        )
+
+        this.bind('test', testInput, 'Default Value')
+      }
+    }
+    expect(MyExampleComponent).toBeDefined()
+
+    const serviceInstance = new SomeService()
+    const exampleInstance = new MyExampleComponent(null!, serviceInstance)
+    expect(exampleInstance).toBeTruthy()
+
+    exampleInstance.ngOnInit()
+
+    expect(serviceInstance.getSomeObservable).toBeCalled()
+    expect(exampleInstance.test).toEqual('Hello World')
+
+    exampleInstance.ngOnDestroy()
   })
 
   it('can have a template binding', () => {

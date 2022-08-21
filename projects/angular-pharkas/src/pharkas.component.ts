@@ -28,6 +28,7 @@ interface PharkasInput<T> {
   name: string
   next: (obs: T | Observable<T>) => void
   observable: Observable<T>
+  defaultBinding?: () => void
 }
 
 interface PharkasDisplay<T> {
@@ -185,13 +186,25 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
 
   private createInput<T, U extends T>(
     name: string,
-    defaultValue?: U
+    defaultValue?: U | (() => Observable<U>)
   ): PharkasInput<T> {
     const subject = new ReplaySubject<T>(1)
-    if (defaultValue !== undefined) {
-      subject.next(defaultValue)
-    }
     let bound = false
+    let defaultBinding = undefined
+    if (defaultValue !== undefined && typeof defaultValue !== 'function') {
+      subject.next(defaultValue)
+    } else {
+      let valueFunction = defaultValue as (() => Observable<U>) | undefined
+      defaultBinding = () => {
+        if (!bound && valueFunction) {
+          this[subscription].add(bindInputSubject(name, valueFunction(), subject, bound))
+          bound = true
+          // unset closures just in case
+          valueFunction = undefined
+          defaultValue = undefined
+        }
+      }
+    }
     return {
       type: 'input',
       name,
@@ -209,6 +222,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
         }
         bound = true
       },
+      defaultBinding,
       observable: subject.asObservable(),
     }
   }
@@ -218,7 +232,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     T extends TViewModel[P],
     U extends T extends Observable<infer V> ? V : T,
     TDefault extends U
-  >(name: P, defaultValue?: TDefault): PharkasInput<U> {
+  >(name: P, defaultValue?: TDefault | (() => Observable<TDefault>)): PharkasInput<U> {
     let input = this[props].get(name) as PharkasProp<U> | undefined
     if (input && input.type === 'input') {
       return input
@@ -261,7 +275,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     T extends TViewModel[P],
     U extends T extends Observable<infer V> ? V : T,
     TDefault extends U
-  >(name: P, defaultValue?: TDefault): Observable<U> {
+  >(name: P, defaultValue?: TDefault | (() => Observable<TDefault>)): Observable<U> {
     const input = this.getOrCreateInput<P, T, U, TDefault>(name, defaultValue)
     return input.observable
   }
@@ -493,6 +507,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
           )
         } else {
           observables.push(prop.subject.asObservable())
+        }
+      } else if (prop.type === 'input') {
+        if (prop.defaultBinding) {
+          prop.defaultBinding()
         }
       }
     }

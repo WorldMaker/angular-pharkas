@@ -129,7 +129,9 @@ The template binding pattern:
   // …
 })
 export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
-  get testDisplay { return this.bindable<string>('testDisplay') }
+  get testDisplay() {
+    return this.bindable<string>('testDisplay')
+  }
 
   constructor(ref: ChangeDetectorRef) {
     super(ref)
@@ -231,7 +233,7 @@ The Angular Output pattern:
   // …
 })
 export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
-  @Output() readonly testOutput = EventEmitter<string>()
+  @Output() readonly testOutput = new EventEmitter<string>()
 
   constructor(ref: ChangeDetectorRef) {
     super(ref)

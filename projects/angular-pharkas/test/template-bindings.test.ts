@@ -28,12 +28,12 @@ const testScheduler = new TestScheduler((actual, expected) => {
 })
 
 describe('template bindings', () => {
-  it('binds at animation time', () => {
+  it.skip('binds at animation time', () => {
+    // TODO: Need animate() helper from RxJS v8
     testScheduler.run((helpers) => {
-      // ;(helpers as any).animate('          ---x---x---x')
+      ;(helpers as any).animate('          ---x---x---x')
       const input = helpers!.cold<string>('a---d--b-c--')
-      // const expectedResults = '            ---a---b---c'
-      const expectedResults = 'c'
+      const expectedResults = '            ---a---b---c'
 
       const testComponent = new SimpleTemplateComponent()
       testComponent.testInput = input

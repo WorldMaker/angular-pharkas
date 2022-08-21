@@ -3,6 +3,23 @@ import { throwError } from 'rxjs'
 import { PharkasComponent } from '../src/pharkas.component'
 
 describe('blinkenlights work', () => {
+  it('shows no errors by default', () => {
+    class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
+      constructor(ref: ChangeDetectorRef) {
+        super(ref)
+      }
+    }
+
+    const exampleInstance = new MyExampleComponent(null!)
+    exampleInstance.ngOnInit()
+
+    expect(exampleInstance.pharkasEffectError).toBeFalsy()
+    expect(exampleInstance.pharkasTemplateError).toBeFalsy()
+    expect(exampleInstance.pharkasError).toBeFalsy()
+
+    exampleInstance.ngOnDestroy()
+  })
+
   it('notifies on template error', () => {
     class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
       get test() {

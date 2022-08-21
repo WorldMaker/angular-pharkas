@@ -1,4 +1,4 @@
-const baseConfig = require('../../jest.config');
+const baseConfig = require('../../jest.config')
 
 module.exports = {
   ...baseConfig,
@@ -12,4 +12,4 @@ module.exports = {
       tsconfig: '<rootDir>/projects/angular-pharkas/tsconfig.spec.json',
     },
   },
-};
+}

@@ -22,6 +22,7 @@ describe('blinkenlights work', () => {
     // Template binding itself should still work otherwise Angular throws a fit
     expect(exampleInstance.test).toEqual('Default Value')
     expect(exampleInstance.pharkasTemplateError).toBeTruthy()
+    expect(exampleInstance.pharkasError).toBeTruthy()
 
     exampleInstance.ngOnDestroy()
   })
@@ -43,6 +44,7 @@ describe('blinkenlights work', () => {
     exampleInstance.ngOnInit()
 
     expect(exampleInstance.pharkasEffectError).toBeTruthy()
+    expect(exampleInstance.pharkasError).toBeTruthy()
 
     exampleInstance.ngOnDestroy()
   })

@@ -25,11 +25,16 @@ At which point you bind them as you would expect following the usual patterns:
 
 ```ts
 @Component({
-// …
-  template: `<example-component [test]="test" (testChange)="handleTestChange"></example-component>`
+  // …
+  template: `<example-component
+    [test]="test"
+    (testChange)="(handleTestChange)"
+  ></example-component>`,
 })
-export class MyExample extends PharkasComponent<MyExample> {
-  get test { return this.bindable<string>('test') }
+export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
+  get test() {
+    return this.bindable<string>('test')
+  }
   readonly handleTestChange: (value: string) => void
 
   constructor(ref: ChangeDetectorRef) {
@@ -38,11 +43,13 @@ export class MyExample extends PharkasComponent<MyExample> {
     this.handleTestChange = this.createCallback('handleTestChange')
     const testChange = this.useCallback('handleTestChange')
 
-    const someObservable = combineLatest([testChange, /* … */]).pipe(
-      map(([test], /* … */) => { /* … */ })
+    const someObservable = combineLatest([testChange /* … */]).pipe(
+      map(([[test] /* … */]) => {
+        /* … */
+      })
     )
 
-    this.bind('test', someObservable)
+    this.bind('test', someObservable, 'Default Value')
   }
 }
 ```
@@ -71,11 +78,11 @@ An extremely simple example:
 @Component({
   // …
 })
-export class MyExample extends PharkasComponent<MyExample> {
+export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
   @Input() set test(value: string | Observable<string>) {
     this.setInput('test', value)
   }
-  @Output() readonly testChange = EventEmitter()
+  @Output() readonly testChange = new EventEmitter<string>()
 
   constructor(ref: ChangeDetectorRef) {
     super(ref)

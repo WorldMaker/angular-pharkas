@@ -27,6 +27,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@angular-builders/jest": "~13.0.4",
     "@angular-devkit/build-angular": "~13.3.9",
     "@angular-eslint/builder": "13.5.0",
     "@angular-eslint/eslint-plugin": "13.5.0",
@@ -37,16 +38,19 @@
     "@angular/compiler-cli": "~13.3.11",
     "@types/eslint": "^8.4.6",
     "@types/estree": "^1.0.0",
+    "@types/jest": "latest",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
+    "jest": "latest",
     "ng-packagr": "^13.3.1",
     "prettier": "^2.5.1",
     "ts-node": "~8.3.0",
     "typedoc": "^0.23.10",
     "typedoc-plugin-markdown": "3.13",
-    "typescript": "~4.6.4"
+    "typescript": "~4.6.4",
+    "zone.js": "^0.11.8"
   }
 }

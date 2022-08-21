@@ -48,6 +48,7 @@ interface PharkasCallback<T> {
 type PharkasProp<T> = PharkasInput<T> | PharkasDisplay<T> | PharkasCallback<T>
 
 interface PharkasMeta {
+  changeSubject: Subject<void>
   templateError: BehaviorSubject<boolean>
   effectError: boolean
 }
@@ -122,15 +123,23 @@ function bindTemplateSubject<T>(
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
-  private [subscription] = new Subscription()
-  private [props]: Map<keyof TViewModel, PharkasProp<unknown>> = new Map()
-  private [pharkas]: PharkasMeta = {
+  private readonly [subscription] = new Subscription()
+  private readonly [props]: Map<keyof TViewModel, PharkasProp<unknown>> =
+    new Map()
+  private readonly [pharkas]: PharkasMeta = {
+    changeSubject: new Subject<void>(),
     effectError: false,
     templateError: new BehaviorSubject<boolean>(false),
   }
 
   //#region *** Blinkenlights ***
 
+  /**
+   * An observable notifying when template changes have occured.
+   */
+  public get pharkasChangeNotifications() {
+    return this[pharkas].changeSubject.asObservable()
+  }
   /**
    * An error has been observed in any observable applied to `bind`, `bindImmediate`,
    * `bindEffect`, or `bindEffectImmediate`.
@@ -154,7 +163,23 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
 
   //#endregion
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(ref: ChangeDetectorRef) {
+    if (ref) {
+      this[subscription].add(
+        this[pharkas].changeSubject.subscribe({
+          next() {
+            ref.detectChanges()
+          },
+          error() {
+            ref.detectChanges()
+          },
+          complete() {
+            ref.detectChanges()
+          },
+        })
+      )
+    }
+  }
 
   //#region *** Inputs ***
 
@@ -397,7 +422,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
         error: (error: any) => {
           console.error('Error in effect observation', error)
           this[pharkas].effectError = true
-          this.ref.detectChanges()
+          this[pharkas].changeSubject.next()
         },
         complete: () => {
           if (isDevMode()) {
@@ -425,7 +450,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
         error: (error: any) => {
           console.error('Error in effect observation', error)
           this[pharkas].effectError = true
-          this.ref.detectChanges()
+          this[pharkas].changeSubject.next()
         },
         complete: () => {
           if (isDevMode()) {
@@ -447,14 +472,14 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
         if (prop.immediate) {
           this[subscription].add(
             prop.subject.subscribe({
-              next: () => this.ref.detectChanges(),
+              next: () => this[pharkas].changeSubject.next(),
               error: (error) => {
                 console.error(
                   `Error in immediate template binding "${prop.name}"`,
                   error
                 )
                 this[pharkas].templateError.next(true)
-                this.ref.detectChanges()
+                this[pharkas].changeSubject.next()
               },
               complete: () => {
                 if (isDevMode()) {
@@ -462,6 +487,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
                     `Immediate template binding "${prop.name}" completed`
                   )
                 }
+                this[pharkas].changeSubject.next()
               },
             })
           )
@@ -478,16 +504,17 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       this[subscription].add(
         displayObservable.subscribe({
           next: () => {
-            this.ref.detectChanges()
+            this[pharkas].changeSubject.next()
           },
           error: (error: any) => {
             console.error('Error in template bindings', error)
-            this.ref.detectChanges()
+            this[pharkas].changeSubject.next()
           },
           complete: () => {
             if (isDevMode()) {
               console.warn('Template bindings completed')
             }
+            this[pharkas].changeSubject.next()
           },
         })
       )
@@ -495,6 +522,7 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this[pharkas].changeSubject.complete()
     this[subscription].unsubscribe()
   }
 }

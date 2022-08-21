@@ -197,7 +197,9 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       let valueFunction = defaultValue as (() => Observable<U>) | undefined
       defaultBinding = () => {
         if (!bound && valueFunction) {
-          this[subscription].add(bindInputSubject(name, valueFunction(), subject, bound))
+          this[subscription].add(
+            bindInputSubject(name, valueFunction(), subject, bound)
+          )
           bound = true
           // unset closures just in case
           valueFunction = undefined
@@ -232,7 +234,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     T extends TViewModel[P],
     U extends T extends Observable<infer V> ? V : T,
     TDefault extends U
-  >(name: P, defaultValue?: TDefault | (() => Observable<TDefault>)): PharkasInput<U> {
+  >(
+    name: P,
+    defaultValue?: TDefault | (() => Observable<TDefault>)
+  ): PharkasInput<U> {
     let input = this[props].get(name) as PharkasProp<U> | undefined
     if (input && input.type === 'input') {
       return input
@@ -275,7 +280,10 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     T extends TViewModel[P],
     U extends T extends Observable<infer V> ? V : T,
     TDefault extends U
-  >(name: P, defaultValue?: TDefault | (() => Observable<TDefault>)): Observable<U> {
+  >(
+    name: P,
+    defaultValue?: TDefault | (() => Observable<TDefault>)
+  ): Observable<U> {
     const input = this.getOrCreateInput<P, T, U, TDefault>(name, defaultValue)
     return input.observable
   }

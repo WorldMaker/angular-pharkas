@@ -120,6 +120,24 @@ export class … {
 
 It will give you console warnings in development builds for non-Observable inputs.
 
+`this.useInput` accepts as an optional second parameter a default value or a function that returns a default
+Observable if an Observable was not bound to the input property prior to `ngOnInit`.
+
+```ts
+export class … {
+  constructor(ref: ChangeDetectorRef, service: SomeService) {
+    super(ref)
+
+    const testInput = this.useInput('testInput', () => service.GetSomeObservable())
+
+    // Use testInput to build observable pipelines…
+  }
+}
+```
+
+Note that using a service class dependency adds tighter coupling for what may be more useful as an always
+provided input, which would be looser coupled.
+
 Also, yeah the string property names and duplication isn't great, but we are working with what Angular gives us.
 
 ## Template Bindings (View Variables, Display Slots, Whatever You Call Them)

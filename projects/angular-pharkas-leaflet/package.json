@@ -1,0 +1,33 @@
+{
+  "name": "angular-pharkas-leaflet",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/common": "^13.3.0",
+    "@angular/core": "^13.3.0",
+    "angular-pharkas": "~5.2.0",
+    "leaflet": "^1.8.0",
+    "rxjs-spy": "^7.5.3"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "typedoc": {
+    "entryPoint": "src/public-api.ts"
+  },
+  "description": "An Observable focused Angular base component for working with Leaflet",
+  "main": "index.js",
+  "author": "Max Battcher <me@worldmaker.net>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WorldMaker/angular-pharkas.git"
+  },
+  "keywords": [
+    "angular",
+    "rxjs"
+  ],
+  "bugs": {
+    "url": "https://github.com/WorldMaker/angular-pharkas/issues"
+  },
+  "homepage": "https://worldmaker.net/angular-pharkas/"
+}

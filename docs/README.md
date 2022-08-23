@@ -1,4 +1,4 @@
-angular-pharkas / [Exports](modules.md)
+pharkas / [Exports](modules.md)
 
 # Angular-Pharkas
 

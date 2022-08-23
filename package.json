@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build --configuration=production",
     "build:lib": "ng build --configuration=production angular-pharkas",
-    "typedoc:md": "typedoc --plugin typedoc-plugin-markdown --out docs projects/angular-pharkas/src/public-api.ts --cleanOutputDir false --excludePrivate",
+    "build:lib:highcharts": "ng build --configuration=production angular-pharkas-highcharts",
+    "build:lib:leaflet": "ng build --configuration=production angular-pharkas-leaflet",
+    "typedoc:md": "typedoc --plugin typedoc-plugin-markdown --out docs --readme projects/angular-pharkas/README.md --entryPointStrategy packages projects/* --cleanOutputDir false --excludePrivate",
     "prettier": "prettier -w .",
     "prettier:check": "prettier --check .",
     "test": "ng test",
@@ -23,7 +25,11 @@
     "@angular/platform-browser": "~13.3.11",
     "@angular/platform-browser-dynamic": "~13.3.11",
     "@angular/router": "~13.3.11",
+    "@types/leaflet": "^1.7.11",
+    "highcharts": "^10.2.0",
+    "leaflet": "^1.8.0",
     "rxjs": "~6.6.0",
+    "rxjs-spy": "^7.5.3",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

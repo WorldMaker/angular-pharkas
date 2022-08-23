@@ -1,3 +1,6 @@
 - [angular-pharkas](/)
 - [Guides](guides.md)
+- [Highcharts](highcharts.md)
+- [Leaflet](leaflet.md)
+- [Utilities](utilities.md)
 - [Modules](modules.md)

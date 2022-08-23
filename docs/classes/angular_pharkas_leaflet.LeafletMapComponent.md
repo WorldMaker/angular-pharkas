@@ -76,7 +76,7 @@ PharkasComponent&lt;TViewModel\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:28](https://github.com/WorldMaker/angular-pharkas/blob/dcadbac/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L28)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:28](https://github.com/WorldMaker/angular-pharkas/blob/5846b93/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L28)
 
 ## Properties
 
@@ -100,7 +100,7 @@ PharkasComponent&lt;TViewModel\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:24](https://github.com/WorldMaker/angular-pharkas/blob/dcadbac/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L24)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:24](https://github.com/WorldMaker/angular-pharkas/blob/5846b93/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L24)
 
 ___
 
@@ -622,4 +622,4 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:50](https://github.com/WorldMaker/angular-pharkas/blob/dcadbac/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L50)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:50](https://github.com/WorldMaker/angular-pharkas/blob/5846b93/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L50)

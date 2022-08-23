@@ -6,6 +6,8 @@
     "start": "ng serve",
     "build": "ng build --configuration=production",
     "build:lib": "ng build --configuration=production angular-pharkas",
+    "build:lib:highcharts": "ng build --configuration=production angular-pharkas-highcharts",
+    "build:lib:leaflet": "ng build --configuration=production angular-pharkas-leaflet",
     "typedoc:md": "typedoc --plugin typedoc-plugin-markdown --out docs --readme projects/angular-pharkas/README.md --entryPointStrategy packages projects/* --cleanOutputDir false --excludePrivate",
     "prettier": "prettier -w .",
     "prettier:check": "prettier --check .",

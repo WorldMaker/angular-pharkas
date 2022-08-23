@@ -3,13 +3,15 @@ const baseConfig = require('../../jest.config')
 module.exports = {
   ...baseConfig,
   moduleNameMapper: {
-    '@core/(.*)': '<rootDir>/src/app/core/$1',
+    'angular-pharkas/(.*)': '<rootDir>/projects/angular-pharkas/$1',
   },
+  modulePathIgnorePatterns: ['<rootDir>/dist'],
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   globals: {
     'ts-jest': {
-      tsconfig: '<rootDir>/projects/angular-pharkas-highcharts/tsconfig.spec.json',
+      tsconfig:
+        '<rootDir>/projects/angular-pharkas-highcharts/tsconfig.spec.json',
     },
   },
 }

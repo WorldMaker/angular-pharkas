@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core'
 import { Observable } from 'rxjs'
 
 export function observeResize(element: ElementRef) {
-  return new Observable<any[]>((observer) => {
+  return new Observable<ResizeObserverEntry[]>((observer) => {
     const resizeObserver = new ResizeObserver((entries) => {
       observer.next(entries)
     })

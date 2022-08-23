@@ -1,3 +1,4 @@
 - [angular-pharkas](/)
 - [Guides](guides.md)
+- [Utilities](utilities.md)
 - [Modules](modules.md)

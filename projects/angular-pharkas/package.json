@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/WorldMaker/angular-pharkas/issues"
   },
-  "homepage": "https://worldmaker.net/angular-pharkas/"
+  "homepage": "https://worldmaker.net/angular-pharkas/",
+  "typedoc": {
+    "entryPoint": "src/public-api.ts"
+  }
 }

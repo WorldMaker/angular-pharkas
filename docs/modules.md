@@ -1,10 +1,11 @@
-[angular-pharkas](README.md) / Exports
+[pharkas](README.md) / Exports
 
-# angular-pharkas
+# pharkas
 
 ## Table of contents
 
-### Classes
+### Modules
 
-- [PharkasComponent](classes/PharkasComponent.md)
-- [PharkasModule](classes/PharkasModule.md)
+- [angular-pharkas](modules/angular_pharkas.md)
+- [angular-pharkas-highcharts](modules/angular_pharkas_highcharts.md)
+- [angular-pharkas-leaflet](modules/angular_pharkas_leaflet.md)

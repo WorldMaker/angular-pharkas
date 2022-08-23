@@ -14,6 +14,9 @@ import { debounceTime, delay, shareReplay, switchMap } from 'rxjs/operators'
 const setMap = Symbol('map state setter')
 const mapState = Symbol('map state')
 
+/**
+ * Pharkas Base Component for building Leaflet Maps
+ */
 @Component({
   template: '⚠ Base Component Template',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +50,12 @@ export class LeafletMapComponent<
     })
   }
 
+  /**
+   * Use a Leaflet Map
+   *
+   * @param options Leaflet options
+   * @returns Observable of Leaflet Map
+   */
   protected useMap(options: L.MapOptions) {
     if (this.mapBound) {
       // This isn't strictly necessary, things should work right if multiple "useMap" calls happen, but it's a perf leak

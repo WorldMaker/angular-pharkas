@@ -4,6 +4,8 @@
 
 [angular-pharkas-leaflet](../modules/angular_pharkas_leaflet.md).LeafletMapComponent
 
+Pharkas Base Component for building Leaflet Maps
+
 ## Type parameters
 
 | Name | Type |
@@ -76,7 +78,7 @@ PharkasComponent&lt;TViewModel\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:28](https://github.com/WorldMaker/angular-pharkas/blob/5846b93/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L28)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:31](https://github.com/WorldMaker/angular-pharkas/blob/ddc8552/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L31)
 
 ## Properties
 
@@ -100,7 +102,7 @@ PharkasComponent&lt;TViewModel\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:24](https://github.com/WorldMaker/angular-pharkas/blob/5846b93/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L24)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:27](https://github.com/WorldMaker/angular-pharkas/blob/ddc8552/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L27)
 
 ___
 
@@ -610,16 +612,20 @@ ___
 
 ▸ `Protected` **useMap**(`options`): `Observable`<`Map`\>
 
+Use a Leaflet Map
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `MapOptions` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | `MapOptions` | Leaflet options |
 
 #### Returns
 
 `Observable`<`Map`\>
 
+Observable of Leaflet Map
+
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:50](https://github.com/WorldMaker/angular-pharkas/blob/5846b93/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L50)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/ddc8552/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L59)

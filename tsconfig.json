@@ -6,6 +6,11 @@
       "angular-pharkas": [
         "dist/angular-pharkas/angular-pharkas",
         "dist/angular-pharkas"
+      ],
+      "angular-pharkas/*": ["dist/angular-pharkas/*"],
+      "angular-pharkas-leaflet": [
+        "dist/angular-pharkas-leaflet/angular-pharkas-leaflet",
+        "dist/angular-pharkas-leaflet"
       ]
     },
     "baseUrl": "./",

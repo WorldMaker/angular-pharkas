@@ -140,6 +140,35 @@
           }
         }
       }
+    },
+    "angular-pharkas-leaflet": {
+      "projectType": "library",
+      "root": "projects/angular-pharkas-leaflet",
+      "sourceRoot": "projects/angular-pharkas-leaflet/src",
+      "prefix": "pharkas",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-pharkas-leaflet/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-pharkas-leaflet/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-pharkas-leaflet/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/angular-pharkas-leaflet/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "pharkas"

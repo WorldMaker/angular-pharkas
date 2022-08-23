@@ -1,5 +1,5 @@
-import { InjectionToken } from "@angular/core"
-import * as Highcharts from "highcharts"
+import { InjectionToken } from '@angular/core'
+import * as Highcharts from 'highcharts'
 import HighchartsStock from 'highcharts/modules/stock'
 
 HighchartsStock(Highcharts)

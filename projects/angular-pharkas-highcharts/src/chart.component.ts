@@ -27,7 +27,11 @@ export class ChartComponent extends PharkasComponent<ChartComponent> {
     this.setInput('oneToOne', value)
   }
 
-  constructor(ref: ChangeDetectorRef, host: ElementRef, @Optional() @Inject(HIGHCHARTS) highcharts?: typeof Highcharts) {
+  constructor(
+    ref: ChangeDetectorRef,
+    host: ElementRef,
+    @Optional() @Inject(HIGHCHARTS) highcharts?: typeof Highcharts
+  ) {
     super(ref)
 
     const options = this.useInput('options')

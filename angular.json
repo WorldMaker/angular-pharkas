@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pharkas": {
+    "test-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -13,20 +13,23 @@
           "strict": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/test-app",
+      "sourceRoot": "projects/test-app/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pharkas",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "outputPath": "dist/test-app",
+            "index": "projects/test-app/src/index.html",
+            "main": "projects/test-app/src/main.ts",
+            "polyfills": "projects/test-app/src/polyfills.ts",
+            "tsConfig": "projects/test-app/tsconfig.app.json",
+            "assets": [
+              "projects/test-app/src/favicon.ico",
+              "projects/test-app/src/assets"
+            ],
+            "styles": ["projects/test-app/src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -39,8 +42,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/test-app/environments/environment.ts",
+                  "with": "projects/test-app/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -69,26 +72,29 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pharkas:build"
+            "browserTarget": "test-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pharkas:build:production"
+              "browserTarget": "test-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pharkas:build"
+            "browserTarget": "test-app:build"
           }
         },
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "tsConfig": "tsconfig.spec.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "tsConfig": "projects/test-app/tsconfig.spec.json",
+            "assets": [
+              "projects/test-app/src/favicon.ico",
+              "projects/test-app/assets"
+            ],
+            "styles": ["projects/test-app/src/styles.scss"],
             "scripts": []
           }
         },
@@ -200,5 +206,5 @@
       }
     }
   },
-  "defaultProject": "pharkas"
+  "defaultProject": "test-app"
 }

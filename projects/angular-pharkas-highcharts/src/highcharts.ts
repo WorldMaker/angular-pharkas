@@ -1,9 +1,9 @@
 import { InjectionToken } from '@angular/core'
-import * as Highcharts from 'highcharts'
+import * as H from 'highcharts'
 import HighchartsStock from 'highcharts/modules/stock'
 
-HighchartsStock(Highcharts)
+HighchartsStock(H)
 
-export default Highcharts
+export const Highcharts = H
 
 export const HIGHCHARTS = new InjectionToken<typeof Highcharts>('highcharts')

@@ -17,7 +17,7 @@ import {
   shareReplay,
   switchMap,
 } from 'rxjs/operators'
-import Highcharts, { HIGHCHARTS } from './highcharts'
+import { Highcharts, HIGHCHARTS } from './highcharts'
 
 @Component({
   selector: 'pharkas-stockchart',

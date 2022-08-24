@@ -11,7 +11,7 @@ import { observeResize } from 'angular-pharkas/observe-resize'
 import { PharkasComponent } from 'angular-pharkas'
 import { combineLatest, merge, Observable, of } from 'rxjs'
 import { debounceTime, delay, first, switchMap } from 'rxjs/operators'
-import Highcharts, { HIGHCHARTS } from './highcharts'
+import { Highcharts, HIGHCHARTS } from './highcharts'
 
 @Component({
   selector: 'pharkas-chart',

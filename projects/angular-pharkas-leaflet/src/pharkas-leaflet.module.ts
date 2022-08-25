@@ -5,4 +5,4 @@ import { LeafletMapComponent } from './leaflet-map.component'
   declarations: [LeafletMapComponent],
   exports: [LeafletMapComponent],
 })
-export class AngularPharkasLeafletModule {}
+export class PharkasLeafletModule {}

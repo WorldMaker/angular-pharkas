@@ -17,7 +17,7 @@ It's benefits are:
 
 ## Usage
 
-Import `AngularPharkasLeafletModule` and use `LeafletMapComponent` as a replacement base component like
+Import `PharkasLeafletModule` and use `LeafletMapComponent` as a replacement base component like
 `PharkasComponent`. The `this.useMap()` "hook" takes Leaflet options and returns and `Observable<LeafletMap>`.
 
 A basic example:

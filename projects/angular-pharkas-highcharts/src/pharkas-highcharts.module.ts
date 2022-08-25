@@ -1,5 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core'
-import * as Highcharts from 'highcharts'
+import { NgModule } from '@angular/core'
 import { ChartComponent } from './chart.component'
 import { StockChartComponent } from './stock-chart.component'
 
@@ -7,4 +6,4 @@ import { StockChartComponent } from './stock-chart.component'
   declarations: [ChartComponent, StockChartComponent],
   exports: [ChartComponent, StockChartComponent],
 })
-export class AngularPharkasHighchartsModule {}
+export class PharkasHighchartsModule {}

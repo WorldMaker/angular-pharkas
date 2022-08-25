@@ -18,7 +18,7 @@ It's key benefits are:
 
 ## Usage
 
-Import `AngularPharkasHighchartsModule` and use either `<pharkas-chart>` or `<pharkas-stockchart>` components
+Import `PharkasHighchartsModule` and use either `<pharkas-chart>` or `<pharkas-stockchart>` components
 as needed.
 
 Both components differ only in the Highcharts constructor function used (`chart()` and `stockChart()`

@@ -49,13 +49,19 @@ You can configure other modules and/or default options by using the `HIGHCHARTS`
 For instance to install the drill-down module, somewhere in your app (likely in your app's root module):
 
 ```ts
-import { Highcharts, HIGHCHARTS } from 'angular-pharkas-highcharts'
+import { HIGHCHARTS } from 'angular-pharkas-highcharts'
+import * as Highcharts from 'highcharts'
 import Drilldown from 'highcharts/modules/drilldown'
+import StockChart from 'highcharts/modules/stock'
 
-// Highcharts imported from here already has Stockchart module applied
+// ES Module imports are immutable proxies, so we need a mutable shallow clone
+const H = {
+  ...Highcharts,
+}
 
-Drilldown(Highcharts)
+Drilldown(H)
+StockChart(H)
 
-const highchartsProvider = { provide: HIGHCHARTS, useValue: Highcharts }
+const highchartsProvider = { provide: HIGHCHARTS, useValue: H }
 // add highchartsProvider to the providers: [] of your NgModule
 ```

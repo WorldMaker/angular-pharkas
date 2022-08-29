@@ -1,6 +1,15 @@
-<app-pharkas-test
-  [test]="testing"
-  (mickey)="handleClick($event)"
-></app-pharkas-test>
+<div class="hero is-primary">
+  <div class="hero-body">
+    <h1 class="title">Angular Pharkas Test Dashboard</h1>
+    <h2 class="subtitle">Example components in motion</h2>
+  </div>
+</div>
+
+<section class="section">
+  <app-pharkas-test
+    [test]="testing"
+    (mickey)="handleClick($event)"
+  ></app-pharkas-test>
+</section>
 
 <router-outlet></router-outlet>

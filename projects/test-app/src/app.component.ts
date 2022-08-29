@@ -1,4 +1,8 @@
-import { ChangeDetectorRef, Component } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core'
 import { timer } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { PharkasComponent } from 'angular-pharkas'
@@ -7,6 +11,7 @@ import { PharkasComponent } from 'angular-pharkas'
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent extends PharkasComponent<AppComponent> {
   title = 'pharkas'

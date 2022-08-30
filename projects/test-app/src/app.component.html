@@ -6,12 +6,20 @@
 </div>
 
 <section class="section">
+  <p>
+    <strong>Exploration Tip:</strong> Many of the observables are tagged for
+    <a href="https://github.com/cartant/rxjs-spy">rxjs-spy</a> and can be
+    explored with the <code>spy</code> tool in your browser's developer console.
+  </p>
+</section>
+
+<section class="section">
   <app-pharkas-test
     [test]="testing"
     (mickey)="handleClick($event)"
   ></app-pharkas-test>
-
-  <app-pharkas-test-chart></app-pharkas-test-chart>
 </section>
+
+<app-pharkas-test-chart></app-pharkas-test-chart>
 
 <router-outlet></router-outlet>

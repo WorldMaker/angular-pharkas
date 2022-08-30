@@ -3,4 +3,5 @@
 - [Highcharts](highcharts.md)
 - [Leaflet](leaflet.md)
 - [Utilities](utilities.md)
+- [Demo](demo/index.html ':ignore')
 - [Modules](modules.md)

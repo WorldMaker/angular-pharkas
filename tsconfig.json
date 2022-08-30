@@ -8,6 +8,10 @@
         "dist/angular-pharkas"
       ],
       "angular-pharkas/*": ["dist/angular-pharkas/*"],
+      "angular-pharkas-highcharts": [
+        "dist/angular-pharkas-highcharts/angular-pharkas-highcharts",
+        "dist/angular-pharkas-highcharts"
+      ],
       "angular-pharkas-leaflet": [
         "dist/angular-pharkas-leaflet/angular-pharkas-leaflet",
         "dist/angular-pharkas-leaflet"

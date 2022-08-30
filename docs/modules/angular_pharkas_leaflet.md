@@ -6,5 +6,5 @@
 
 ### Classes
 
-- [AngularPharkasLeafletModule](../classes/angular_pharkas_leaflet.AngularPharkasLeafletModule.md)
 - [LeafletMapComponent](../classes/angular_pharkas_leaflet.LeafletMapComponent.md)
+- [PharkasLeafletModule](../classes/angular_pharkas_leaflet.PharkasLeafletModule.md)

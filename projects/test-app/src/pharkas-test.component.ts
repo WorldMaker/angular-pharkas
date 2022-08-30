@@ -11,15 +11,17 @@ import { scan } from 'rxjs/operators'
 
 @Component({
   selector: 'app-pharkas-test',
-  template: `<p
+  template: `<div
+    class="notification"
     (click)="handleClick($event)"
-    [style.backgroundColor]="highlighted ? 'yellow' : 'white'"
+    [class.is-warning]="highlighted"
   >
     Hello {{ testDisplay }}
-  </p>`,
+  </div>`,
 })
 export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent> {
   // *** Inputs ***
+
   @Input() set test(value: string | Observable<string>) {
     this.setInput('test', value)
   }

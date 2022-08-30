@@ -6,13 +6,14 @@
 
 ### Classes
 
-- [AngularPharkasHighchartsModule](../classes/angular_pharkas_highcharts.AngularPharkasHighchartsModule.md)
 - [ChartComponent](../classes/angular_pharkas_highcharts.ChartComponent.md)
+- [PharkasHighchartsModule](../classes/angular_pharkas_highcharts.PharkasHighchartsModule.md)
 - [StockChartComponent](../classes/angular_pharkas_highcharts.StockChartComponent.md)
 
 ### Variables
 
 - [HIGHCHARTS](angular_pharkas_highcharts.md#highcharts)
+- [Highcharts](angular_pharkas_highcharts.md#highcharts-1)
 
 ## Variables
 
@@ -22,4 +23,14 @@
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/highcharts.ts:9](https://github.com/WorldMaker/angular-pharkas/blob/ddc8552/projects/angular-pharkas-highcharts/src/highcharts.ts#L9)
+[projects/angular-pharkas-highcharts/src/highcharts.ts:13](https://github.com/WorldMaker/angular-pharkas/blob/f88bfa3/projects/angular-pharkas-highcharts/src/highcharts.ts#L13)
+
+---
+
+### Highcharts
+
+• `Const` **Highcharts**: typeof `_Highcharts` = `H`
+
+#### Defined in
+
+[projects/angular-pharkas-highcharts/src/highcharts.ts:11](https://github.com/WorldMaker/angular-pharkas/blob/f88bfa3/projects/angular-pharkas-highcharts/src/highcharts.ts#L11)

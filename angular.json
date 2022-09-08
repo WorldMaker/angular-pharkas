@@ -147,6 +147,35 @@
         }
       }
     },
+    "angular-pharkas-blurhash": {
+      "projectType": "library",
+      "root": "projects/angular-pharkas-blurhash",
+      "sourceRoot": "projects/angular-pharkas-blurhash/src",
+      "prefix": "pharkas",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-pharkas-blurhash/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-pharkas-blurhash/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-pharkas-blurhash/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/angular-pharkas-blurhash/tsconfig.spec.json"
+          }
+        }
+      }
+    },
     "angular-pharkas-highcharts": {
       "projectType": "library",
       "root": "projects/angular-pharkas-highcharts",

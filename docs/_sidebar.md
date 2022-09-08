@@ -1,5 +1,6 @@
 - [angular-pharkas](/)
 - [Guides](guides.md)
+- [Blurhash](blurhash.md)
 - [Highcharts](highcharts.md)
 - [Leaflet](leaflet.md)
 - [Utilities](utilities.md)

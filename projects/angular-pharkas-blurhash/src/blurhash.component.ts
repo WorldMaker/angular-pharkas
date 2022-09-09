@@ -125,7 +125,6 @@ export class BlurhashComponent extends PharkasComponent<BlurhashComponent> {
             }
             blurhashBlobUrl = URL.createObjectURL(blob)
             observer.next(`url("${blurhashBlobUrl}")`)
-            observer.complete()
           })
 
           return () => {

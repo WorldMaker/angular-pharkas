@@ -8,3 +8,7 @@
 
 - [BlurhashComponent](../classes/angular_pharkas_blurhash.BlurhashComponent.md)
 - [PharkasBlurhashModule](../classes/angular_pharkas_blurhash.PharkasBlurhashModule.md)
+
+### Interfaces
+
+- [BlurhashDescription](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)

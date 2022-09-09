@@ -67,7 +67,7 @@ PharkasComponent&lt;BlurhashComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
 
 ## Properties
 
@@ -109,7 +109,7 @@ dist/angular-pharkas/pharkas.component.d.ts:112
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:51](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L51)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:51](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L51)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:48](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L48)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:48](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L48)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `Observable`<`BlurhashDescription`\> |
+| `value` | `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> |
 
 #### Returns
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:35](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L35)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:35](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L35)
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:42](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L42)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:42](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L42)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:39](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L39)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:39](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L39)
 
 ___
 
@@ -267,7 +267,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:45](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L45)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:45](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L45)
 
 ## Methods
 
@@ -284,7 +284,7 @@ Default bound observation is combined and throttled to requestAnimationFrame for
 | Name | Type |
 | :------ | :------ |
 | `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
-| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `T` | extends `string` \| `boolean` \| `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -356,7 +356,7 @@ Immediate bindings are neither combined nor throttled.
 | Name | Type |
 | :------ | :------ |
 | `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
-| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `T` | extends `string` \| `boolean` \| `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -493,7 +493,7 @@ Create a callback function
 | Name | Type |
 | :------ | :------ |
 | `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
-| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `T` | extends `string` \| `boolean` \| `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
 | `U` | extends () => `void` \| () => `void` |
 
 #### Parameters
@@ -565,8 +565,8 @@ Set an input value
 | Name | Type |
 | :------ | :------ |
 | `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
-| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
-| `U` | extends `string` \| `boolean` \| `void` \| `BlurhashDescription` \| () => `void` \| () => `void` |
+| `T` | extends `string` \| `boolean` \| `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `U` | extends `string` \| `boolean` \| `void` \| [`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md) \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -600,7 +600,7 @@ Get an observable of calls to the callback function
 | Name | Type |
 | :------ | :------ |
 | `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
-| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `T` | extends `string` \| `boolean` \| `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
 | `U` | extends [] |
 
 #### Parameters
@@ -636,9 +636,9 @@ Observe an `@Input()` built with `this.setInput`
 | Name | Type |
 | :------ | :------ |
 | `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
-| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
-| `U` | extends `string` \| `boolean` \| `void` \| `BlurhashDescription` \| () => `void` \| () => `void` |
-| `TDefault` | extends `string` \| `boolean` \| `void` \| `BlurhashDescription` \| () => `void` \| () => `void` |
+| `T` | extends `string` \| `boolean` \| `Observable`<[`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md)\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `U` | extends `string` \| `boolean` \| `void` \| [`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md) \| () => `void` \| () => `void` |
+| `TDefault` | extends `string` \| `boolean` \| `void` \| [`BlurhashDescription`](../interfaces/angular_pharkas_blurhash.BlurhashDescription.md) \| () => `void` \| () => `void` |
 
 #### Parameters
 

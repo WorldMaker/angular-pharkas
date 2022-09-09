@@ -13,7 +13,13 @@ MIT
 angular-pharkas
 MIT
 
+angular-pharkas-blurhash
+MIT
+
 angular-pharkas-highcharts
+MIT
+
+blurhash
 MIT
 
 highcharts

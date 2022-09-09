@@ -1,17 +1,30 @@
-<div class="hero is-primary">
+<div id="hero" class="hero is-primary">
   <div class="hero-body">
     <h1 class="title">Angular Pharkas Test Dashboard</h1>
     <h2 class="subtitle">Example components in motion</h2>
   </div>
 </div>
 
-<section class="section">
+<section id="tip" class="section">
+  <p>
+    <strong>Exploration Tip:</strong> Many of the observables are tagged for
+    <a href="https://github.com/cartant/rxjs-spy">rxjs-spy</a> and can be
+    explored with the <code>spy</code> tool in your browser's developer console.
+  </p>
+</section>
+
+<section id="counter" class="section">
   <app-pharkas-test
     [test]="testing"
     (mickey)="handleClick($event)"
   ></app-pharkas-test>
-
-  <app-pharkas-test-chart></app-pharkas-test-chart>
 </section>
+
+<app-pharkas-test-chart id="chart"></app-pharkas-test-chart>
+
+<div id="blurhash">
+  <p class="attribution" [innerHTML]="attribution"></p>
+  <pharkas-blurhash [image]="images"></pharkas-blurhash>
+</div>
 
 <router-outlet></router-outlet>

@@ -8,6 +8,10 @@
         "dist/angular-pharkas"
       ],
       "angular-pharkas/*": ["dist/angular-pharkas/*"],
+      "angular-pharkas-blurhash": [
+        "dist/angular-pharkas-blurhash/angular-pharkas-blurhash",
+        "dist/angular-pharkas-blurhash"
+      ],
       "angular-pharkas-highcharts": [
         "dist/angular-pharkas-highcharts/angular-pharkas-highcharts",
         "dist/angular-pharkas-highcharts"

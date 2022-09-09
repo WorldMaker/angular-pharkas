@@ -68,7 +68,7 @@ PharkasComponent&lt;BlurhashComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L59)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L59)
 
 ## Properties
 
@@ -110,7 +110,7 @@ dist/angular-pharkas/pharkas.component.d.ts:112
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:46](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L46)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:46](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L46)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:52](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L52)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:52](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L52)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:36](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L36)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:36](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L36)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:43](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L43)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:43](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L43)
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:40](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L40)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:40](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L40)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:49](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L49)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:49](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L49)
 
 ## Methods
 

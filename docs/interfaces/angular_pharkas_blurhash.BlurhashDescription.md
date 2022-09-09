@@ -29,7 +29,7 @@ Blurhash of image
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:28](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L28)
+[projects/angular-pharkas-blurhash/src/model.ts:28](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L28)
 
 ___
 
@@ -41,7 +41,7 @@ Optional "punch" dial for the Blurhash (default is 1)
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:32](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L32)
+[projects/angular-pharkas-blurhash/src/model.ts:32](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L32)
 
 ___
 
@@ -55,7 +55,7 @@ Defaults to `height` if it is a number, otherwise 90 (16x9)
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:24](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L24)
+[projects/angular-pharkas-blurhash/src/model.ts:24](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L24)
 
 ___
 
@@ -69,7 +69,7 @@ Defaults to `width` if it is a number, otherwise 160 (16x9)
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:14](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L14)
+[projects/angular-pharkas-blurhash/src/model.ts:14](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L14)
 
 ___
 
@@ -81,7 +81,7 @@ Width of the container
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:18](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L18)
+[projects/angular-pharkas-blurhash/src/model.ts:18](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L18)
 
 ___
 
@@ -93,7 +93,7 @@ Image alt description
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:40](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L40)
+[projects/angular-pharkas-blurhash/src/model.ts:40](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L40)
 
 ___
 
@@ -105,7 +105,7 @@ Image src URL
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:36](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L36)
+[projects/angular-pharkas-blurhash/src/model.ts:36](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L36)
 
 ___
 
@@ -117,4 +117,4 @@ Width of the container
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/model.ts:8](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-blurhash/src/model.ts#L8)
+[projects/angular-pharkas-blurhash/src/model.ts:8](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/model.ts#L8)

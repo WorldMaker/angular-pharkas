@@ -32,7 +32,7 @@ export class ModelService {
   constructor() {
     // Model: a set of alternatives are being compared (by say price) and updates come in with regular adjustments
     this.alternatives = randomObservable.pipe(
-      // a random price adjustment for a random alternatives
+      // a random price adjustment for a random alternatives, resembling almost a "stock ticker"
       map(
         (rnd) =>
           [
@@ -40,7 +40,8 @@ export class ModelService {
             (Math.random() - 0.5) * 0.15,
           ] as const
       ),
-      // update a combine map of all current "prices"
+      tag('alternatives-data'),
+      // our model state is a combined map of all current "prices"
       scan((state, [name, adjustment]) => {
         const current = state.get(name) ?? 0.5
         const next = current + adjustment

@@ -17,8 +17,7 @@ export const images = Object.freeze(
         'Photo by <a href="https://unsplash.com/@masamasa3?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">masahiro miyagi</a> on <a href="https://unsplash.com/images?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>',
       width: 6000,
       height: 4000,
-      blurhash:
-        '|4BMP.?g004[00#bQ+VEGH}]Z_=zJ;Ee?c$_R6E400Di%gTJyE.7xnS7mm9?tV4;I9-paHI.XnxZ0Ko%vzrW%4M{T1b]bY,vS^tL=yIr9an-sks.xSyCkqEfsER5akwIkRtlogWAJ*WooaoNrrn*R%aQRjxan*XNt6NGRp',
+      blurhash: 'L4BMP.?g004[}]Z_=zJ;00Di%gTJ',
       imageAlt: 'Osaka street',
     },
     {

@@ -20,6 +20,7 @@ const defaultBlurhashCanvasHeight = 90
     style="background-size: 100% 100%"
     [style.width]="widthStyle"
     [style.height]="heightStyle"
+    [style.aspectRatio]="aspectRatio"
     [style.backgroundImage]="blurhashUrl"
   >
     <img
@@ -41,6 +42,9 @@ export class BlurhashComponent extends PharkasComponent<BlurhashComponent> {
   }
   get imageAlt() {
     return this.bindable<string>('imageAlt')
+  }
+  get aspectRatio() {
+    return this.bindable<string>('aspectRatio')
   }
   get widthStyle() {
     return this.bindable<string>('widthStyle')
@@ -74,6 +78,21 @@ export class BlurhashComponent extends PharkasComponent<BlurhashComponent> {
       ),
       '100%'
     )
+
+    const aspectRatio = image.pipe(
+      map(({ width, height, canvasWidth, canvasHeight }) => {
+        const baseWidth =
+          canvasWidth ?? (typeof width === 'number' ? width : undefined)
+        const baseHeight =
+          canvasHeight ?? (typeof height === 'number' ? height : undefined)
+        if (baseWidth && baseHeight) {
+          return (baseWidth / baseHeight).toString()
+        }
+        // default to 16x9
+        return '16 / 9'
+      })
+    )
+    this.bind('aspectRatio', aspectRatio, '16 / 9')
 
     this.bind('imageSrc', image.pipe(map(({ imageSrc }) => imageSrc)), '')
 

@@ -69,7 +69,7 @@ inspirations from ReactiveUI (.NET) and React's Hook components.
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:167](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L167)
+[projects/angular-pharkas/src/pharkas.component.ts:167](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L167)
 
 ## Accessors
 
@@ -85,7 +85,7 @@ An observable notifying when template changes have occured.
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:141](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L141)
+[projects/angular-pharkas/src/pharkas.component.ts:141](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L141)
 
 ___
 
@@ -102,7 +102,7 @@ An error has been observed in any observable applied to `bindEffect` or
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:155](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L155)
+[projects/angular-pharkas/src/pharkas.component.ts:155](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L155)
 
 ___
 
@@ -119,7 +119,7 @@ An error has been observed in any observable applied to `bind`, `bindImmediate`,
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:148](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L148)
+[projects/angular-pharkas/src/pharkas.component.ts:148](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L148)
 
 ___
 
@@ -135,7 +135,7 @@ An error has been observed in any observable applied to `bind` or `bindImmediate
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:161](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L161)
+[projects/angular-pharkas/src/pharkas.component.ts:161](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L161)
 
 ## Methods
 
@@ -168,7 +168,7 @@ Default bound observation is combined and throttled to requestAnimationFrame for
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:318](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L318)
+[projects/angular-pharkas/src/pharkas.component.ts:318](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L318)
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:437](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L437)
+[projects/angular-pharkas/src/pharkas.component.ts:437](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L437)
 
 ___
 
@@ -232,7 +232,7 @@ Immediate bindings are neither combined nor throttled.
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:347](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L347)
+[projects/angular-pharkas/src/pharkas.component.ts:347](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L347)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:465](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L465)
+[projects/angular-pharkas/src/pharkas.component.ts:465](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L465)
 
 ___
 
@@ -292,7 +292,7 @@ Bind an observable to an `@Output()`.
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:375](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L375)
+[projects/angular-pharkas/src/pharkas.component.ts:375](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L375)
 
 ___
 
@@ -322,7 +322,7 @@ value
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:300](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L300)
+[projects/angular-pharkas/src/pharkas.component.ts:300](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L300)
 
 ___
 
@@ -354,7 +354,7 @@ Callback function
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:389](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L389)
+[projects/angular-pharkas/src/pharkas.component.ts:389](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L389)
 
 ___
 
@@ -372,7 +372,7 @@ OnDestroy.ngOnDestroy
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:550](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L550)
+[projects/angular-pharkas/src/pharkas.component.ts:550](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L550)
 
 ___
 
@@ -390,7 +390,7 @@ OnInit.ngOnInit
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:488](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L488)
+[projects/angular-pharkas/src/pharkas.component.ts:488](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L488)
 
 ___
 
@@ -421,7 +421,7 @@ Set an input value
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:257](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L257)
+[projects/angular-pharkas/src/pharkas.component.ts:257](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L257)
 
 ___
 
@@ -453,7 +453,7 @@ Observable
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:412](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L412)
+[projects/angular-pharkas/src/pharkas.component.ts:412](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L412)
 
 ___
 
@@ -487,4 +487,4 @@ Observable
 
 #### Defined in
 
-[projects/angular-pharkas/src/pharkas.component.ts:278](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas/src/pharkas.component.ts#L278)
+[projects/angular-pharkas/src/pharkas.component.ts:278](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas/src/pharkas.component.ts#L278)

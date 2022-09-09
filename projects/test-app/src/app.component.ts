@@ -41,8 +41,8 @@ export class AppComponent extends PharkasComponent<AppComponent> {
         ...image,
         width: '100%',
         height: 'auto',
-        canvasHeight: image.height as number,
-        canvasWidth: image.width as number,
+        canvasHeight: image.canvasHeight ?? (image.height as number),
+        canvasWidth: image.canvasWidth ?? (image.width as number),
       }))
     )
     this.bind(

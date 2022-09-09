@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/highcharts.ts:13](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-highcharts/src/highcharts.ts#L13)
+[projects/angular-pharkas-highcharts/src/highcharts.ts:13](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-highcharts/src/highcharts.ts#L13)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/highcharts.ts:11](https://github.com/WorldMaker/angular-pharkas/blob/941fad3/projects/angular-pharkas-highcharts/src/highcharts.ts#L11)
+[projects/angular-pharkas-highcharts/src/highcharts.ts:11](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-highcharts/src/highcharts.ts#L11)

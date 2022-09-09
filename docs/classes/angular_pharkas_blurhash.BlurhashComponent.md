@@ -1,110 +1,75 @@
-[pharkas](../README.md) / [Exports](../modules.md) / [angular-pharkas-leaflet](../modules/angular_pharkas_leaflet.md) / LeafletMapComponent
+[pharkas](../README.md) / [Exports](../modules.md) / [angular-pharkas-blurhash](../modules/angular_pharkas_blurhash.md) / BlurhashComponent
 
-# Class: LeafletMapComponent<TViewModel\>
+# Class: BlurhashComponent
 
-[angular-pharkas-leaflet](../modules/angular_pharkas_leaflet.md).LeafletMapComponent
-
-Pharkas Base Component for building Leaflet Maps
-
-## Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `TViewModel` | extends [`LeafletMapComponent`](angular_pharkas_leaflet.LeafletMapComponent.md)<`TViewModel`\> |
+[angular-pharkas-blurhash](../modules/angular_pharkas_blurhash.md).BlurhashComponent
 
 ## Hierarchy
 
-- `PharkasComponent`<`TViewModel`\>
+- `PharkasComponent`<[`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md)\>
 
-  ↳ **`LeafletMapComponent`**
+  ↳ **`BlurhashComponent`**
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](angular_pharkas_leaflet.LeafletMapComponent.md#constructor)
+- [constructor](angular_pharkas_blurhash.BlurhashComponent.md#constructor)
 
 ### Properties
 
-- [[setMap]](angular_pharkas_leaflet.LeafletMapComponent.md#[setmap])
-- [ɵcmp](angular_pharkas_leaflet.LeafletMapComponent.md#ɵcmp)
-- [ɵfac](angular_pharkas_leaflet.LeafletMapComponent.md#ɵfac)
+- [ɵcmp](angular_pharkas_blurhash.BlurhashComponent.md#ɵcmp)
+- [ɵfac](angular_pharkas_blurhash.BlurhashComponent.md#ɵfac)
 
 ### Accessors
 
-- [pharkasChangeNotifications](angular_pharkas_leaflet.LeafletMapComponent.md#pharkaschangenotifications)
-- [pharkasEffectError](angular_pharkas_leaflet.LeafletMapComponent.md#pharkaseffecterror)
-- [pharkasError](angular_pharkas_leaflet.LeafletMapComponent.md#pharkaserror)
-- [pharkasTemplateError](angular_pharkas_leaflet.LeafletMapComponent.md#pharkastemplateerror)
+- [blurhashUrl](angular_pharkas_blurhash.BlurhashComponent.md#blurhashurl)
+- [heightStyle](angular_pharkas_blurhash.BlurhashComponent.md#heightstyle)
+- [image](angular_pharkas_blurhash.BlurhashComponent.md#image)
+- [imageAlt](angular_pharkas_blurhash.BlurhashComponent.md#imagealt)
+- [imageSrc](angular_pharkas_blurhash.BlurhashComponent.md#imagesrc)
+- [pharkasChangeNotifications](angular_pharkas_blurhash.BlurhashComponent.md#pharkaschangenotifications)
+- [pharkasEffectError](angular_pharkas_blurhash.BlurhashComponent.md#pharkaseffecterror)
+- [pharkasError](angular_pharkas_blurhash.BlurhashComponent.md#pharkaserror)
+- [pharkasTemplateError](angular_pharkas_blurhash.BlurhashComponent.md#pharkastemplateerror)
+- [widthStyle](angular_pharkas_blurhash.BlurhashComponent.md#widthstyle)
 
 ### Methods
 
-- [bind](angular_pharkas_leaflet.LeafletMapComponent.md#bind)
-- [bindEffect](angular_pharkas_leaflet.LeafletMapComponent.md#bindeffect)
-- [bindImmediate](angular_pharkas_leaflet.LeafletMapComponent.md#bindimmediate)
-- [bindImmediateEffect](angular_pharkas_leaflet.LeafletMapComponent.md#bindimmediateeffect)
-- [bindOutput](angular_pharkas_leaflet.LeafletMapComponent.md#bindoutput)
-- [bindable](angular_pharkas_leaflet.LeafletMapComponent.md#bindable)
-- [createCallback](angular_pharkas_leaflet.LeafletMapComponent.md#createcallback)
-- [ngOnDestroy](angular_pharkas_leaflet.LeafletMapComponent.md#ngondestroy)
-- [ngOnInit](angular_pharkas_leaflet.LeafletMapComponent.md#ngoninit)
-- [setInput](angular_pharkas_leaflet.LeafletMapComponent.md#setinput)
-- [useCallback](angular_pharkas_leaflet.LeafletMapComponent.md#usecallback)
-- [useInput](angular_pharkas_leaflet.LeafletMapComponent.md#useinput)
-- [useMap](angular_pharkas_leaflet.LeafletMapComponent.md#usemap)
+- [bind](angular_pharkas_blurhash.BlurhashComponent.md#bind)
+- [bindEffect](angular_pharkas_blurhash.BlurhashComponent.md#bindeffect)
+- [bindImmediate](angular_pharkas_blurhash.BlurhashComponent.md#bindimmediate)
+- [bindImmediateEffect](angular_pharkas_blurhash.BlurhashComponent.md#bindimmediateeffect)
+- [bindOutput](angular_pharkas_blurhash.BlurhashComponent.md#bindoutput)
+- [bindable](angular_pharkas_blurhash.BlurhashComponent.md#bindable)
+- [createCallback](angular_pharkas_blurhash.BlurhashComponent.md#createcallback)
+- [ngOnDestroy](angular_pharkas_blurhash.BlurhashComponent.md#ngondestroy)
+- [ngOnInit](angular_pharkas_blurhash.BlurhashComponent.md#ngoninit)
+- [setInput](angular_pharkas_blurhash.BlurhashComponent.md#setinput)
+- [useCallback](angular_pharkas_blurhash.BlurhashComponent.md#usecallback)
+- [useInput](angular_pharkas_blurhash.BlurhashComponent.md#useinput)
 
 ## Constructors
 
 ### constructor
 
-• **new LeafletMapComponent**<`TViewModel`\>(`ref`, `element`)
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `TViewModel` | extends [`LeafletMapComponent`](angular_pharkas_leaflet.LeafletMapComponent.md)<`TViewModel`, `TViewModel`\> |
+• **new BlurhashComponent**(`ref`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `ref` | `ChangeDetectorRef` |
-| `element` | `ElementRef`<`any`\> |
 
 #### Overrides
 
-PharkasComponent&lt;TViewModel\&gt;.constructor
+PharkasComponent&lt;BlurhashComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:31](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L31)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
 
 ## Properties
-
-### [setMap]
-
-• `Readonly` **[setMap]**: (`mapState`: `Observable`<`Map`\>) => `void`
-
-#### Type declaration
-
-▸ (`mapState`): `void`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `mapState` | `Observable`<`Map`\> |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:27](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L27)
-
-___
 
 ### ɵcmp
 
@@ -133,6 +98,82 @@ PharkasComponent.ɵfac
 dist/angular-pharkas/pharkas.component.d.ts:112
 
 ## Accessors
+
+### blurhashUrl
+
+• `get` **blurhashUrl**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:51](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L51)
+
+___
+
+### heightStyle
+
+• `get` **heightStyle**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:48](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L48)
+
+___
+
+### image
+
+• `set` **image**(`value`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `Observable`<`BlurhashDescription`\> |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:35](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L35)
+
+___
+
+### imageAlt
+
+• `get` **imageAlt**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:42](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L42)
+
+___
+
+### imageSrc
+
+• `get` **imageSrc**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:39](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L39)
+
+___
 
 ### pharkasChangeNotifications
 
@@ -214,6 +255,20 @@ PharkasComponent.pharkasTemplateError
 
 dist/angular-pharkas/pharkas.component.d.ts:35
 
+___
+
+### widthStyle
+
+• `get` **widthStyle**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:45](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L45)
+
 ## Methods
 
 ### bind
@@ -228,8 +283,8 @@ Default bound observation is combined and throttled to requestAnimationFrame for
 
 | Name | Type |
 | :------ | :------ |
-| `P` | extends `string` \| `number` \| `symbol` |
-| `T` | `T` |
+| `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
+| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -300,8 +355,8 @@ Immediate bindings are neither combined nor throttled.
 
 | Name | Type |
 | :------ | :------ |
-| `P` | extends `string` \| `number` \| `symbol` |
-| `T` | `T` |
+| `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
+| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -409,7 +464,7 @@ Get the value of a bindable (template binding)
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `name` | keyof `TViewModel` | Name of bindable |
+| `name` | keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) | Name of bindable |
 
 #### Returns
 
@@ -437,9 +492,9 @@ Create a callback function
 
 | Name | Type |
 | :------ | :------ |
-| `P` | extends `string` \| `number` \| `symbol` |
-| `T` | `T` |
-| `U` | extends (...`args`: `unknown`[]) => `void` |
+| `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
+| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `U` | extends () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -509,9 +564,9 @@ Set an input value
 
 | Name | Type |
 | :------ | :------ |
-| `P` | extends `string` \| `number` \| `symbol` |
-| `T` | `T` |
-| `U` | extends `unknown` |
+| `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
+| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `U` | extends `string` \| `boolean` \| `void` \| `BlurhashDescription` \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -544,9 +599,9 @@ Get an observable of calls to the callback function
 
 | Name | Type |
 | :------ | :------ |
-| `P` | extends `string` \| `number` \| `symbol` |
-| `T` | `T` |
-| `U` | extends `unknown`[] |
+| `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
+| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `U` | extends [] |
 
 #### Parameters
 
@@ -580,10 +635,10 @@ Observe an `@Input()` built with `this.setInput`
 
 | Name | Type |
 | :------ | :------ |
-| `P` | extends `string` \| `number` \| `symbol` |
-| `T` | `T` |
-| `U` | extends `unknown` |
-| `TDefault` | extends `unknown` |
+| `P` | extends keyof [`BlurhashComponent`](angular_pharkas_blurhash.BlurhashComponent.md) |
+| `T` | extends `string` \| `boolean` \| `Observable`<`BlurhashDescription`\> \| `Observable`<`void`\> \| () => `void` \| () => `void` |
+| `U` | extends `string` \| `boolean` \| `void` \| `BlurhashDescription` \| () => `void` \| () => `void` |
+| `TDefault` | extends `string` \| `boolean` \| `void` \| `BlurhashDescription` \| () => `void` \| () => `void` |
 
 #### Parameters
 
@@ -605,27 +660,3 @@ PharkasComponent.useInput
 #### Defined in
 
 dist/angular-pharkas/pharkas.component.d.ts:51
-
-___
-
-### useMap
-
-▸ `Protected` **useMap**(`options`): `Observable`<`Map`\>
-
-Use a Leaflet Map
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `options` | `MapOptions` | Leaflet options |
-
-#### Returns
-
-`Observable`<`Map`\>
-
-Observable of Leaflet Map
-
-#### Defined in
-
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/f97b3cf/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L59)

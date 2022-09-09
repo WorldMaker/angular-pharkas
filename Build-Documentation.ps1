@@ -4,4 +4,5 @@ Copy-Item .\projects\angular-pharkas-highcharts\README.md .\docs\highcharts.md
 Copy-Item .\projects\angular-pharkas-leaflet\README.md .\docs\leaflet.md
 
 npm run build
-Copy-Item -Recurse -Force .\dist\demo .\docs
+Remove-Item -Recurse .\docs\demo
+Copy-Item -Recurse .\dist\demo .\docs

@@ -7,9 +7,8 @@ import {
 import { PharkasComponent } from 'angular-pharkas'
 import { decode } from 'blurhash'
 import { combineLatest, Observable } from 'rxjs'
-import { debounceTime, map, switchMap } from 'rxjs/operators'
-
-const inputDebounceTime = 100 /* ms */
+import { map, switchMap } from 'rxjs/operators'
+import { BlurhashDescription } from './model'
 
 // Default to 16x9 assuming most photos are "typical widescreen"
 const defaultBlurhashCanvasWidth = 160
@@ -26,37 +25,22 @@ const defaultBlurhashCanvasHeight = 90
     <img
       loading="lazy"
       style="width: 100%; height: 100%; object-fit: cover;"
-      [src]="imageSrcView"
-      [alt]="imageAltView"
+      [src]="imageSrc"
+      [alt]="imageAlt"
     />
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlurhashComponent extends PharkasComponent<BlurhashComponent> {
-  @Input() set width(value: number | string | Observable<number | string>) {
-    this.setInput('width', value)
-  }
-  @Input() set height(value: number | string | Observable<number | string>) {
-    this.setInput('height', value)
-  }
-  @Input() set blurhash(value: string | Observable<string>) {
-    this.setInput('blurhash', value)
-  }
-  @Input() set blurhashPunch(value: number | Observable<number>) {
-    this.setInput('blurhashPunch', value)
-  }
-  @Input() set imageSrc(value: string | Observable<string>) {
-    this.setInput('imageSrc', value)
-  }
-  @Input() set imageAlt(value: string | Observable<string>) {
-    this.setInput('imageAlt', value)
+  @Input() set image(value: Observable<BlurhashDescription>) {
+    this.setInput('image', value)
   }
 
-  get imageSrcView() {
-    return this.bindable<string>('imageSrcView')
+  get imageSrc() {
+    return this.bindable<string>('imageSrc')
   }
-  get imageAltView() {
-    return this.bindable<string>('imageAltView')
+  get imageAlt() {
+    return this.bindable<string>('imageAlt')
   }
   get widthStyle() {
     return this.bindable<string>('widthStyle')
@@ -71,58 +55,54 @@ export class BlurhashComponent extends PharkasComponent<BlurhashComponent> {
   constructor(ref: ChangeDetectorRef) {
     super(ref)
 
-    const width = this.useInput('width')
+    const image = this.useInput('image')
 
     this.bind(
       'widthStyle',
-      width.pipe(
-        map((width) => (typeof width === 'number' ? `${width}px` : width))
+      image.pipe(
+        map(({ width }) => (typeof width === 'number' ? `${width}px` : width))
       ),
       '100%'
     )
-
-    const height = this.useInput('height')
 
     this.bind(
       'heightStyle',
-      height.pipe(
-        map((height) => (typeof height === 'number' ? `${height}px` : height))
+      image.pipe(
+        map(({ height }) =>
+          typeof height === 'number' ? `${height}px` : height
+        )
       ),
       '100%'
     )
 
-    const imageSrc = this.useInput('imageSrc')
-    this.bind('imageSrcView', imageSrc, '')
+    this.bind('imageSrc', image.pipe(map(({ imageSrc }) => imageSrc)), '')
 
-    const imageAlt = this.useInput('imageAlt')
-    this.bind('imageAltView', imageAlt, '')
+    this.bind('imageAlt', image.pipe(map(({ imageAlt }) => imageAlt)), '')
 
-    const blurhash = this.useInput('blurhash')
-    const blurhashPunch = this.useInput('blurhashPunch', 1)
-
-    const blurhashUrl = combineLatest([
-      blurhash,
-      blurhashPunch,
-      width,
-      height,
-    ]).pipe(
-      debounceTime(inputDebounceTime),
-      switchMap(([blurhash, punch, widthInput, heightInput]) => {
+    const blurhashUrl = image.pipe(
+      switchMap((image) => {
         return new Observable<string>((observer) => {
           let blurhashCancelled = false
           let blurhashBlobUrl: string | undefined = undefined
 
           const width =
-            typeof widthInput === 'number'
-              ? widthInput
-              : defaultBlurhashCanvasWidth
+            image.canvasWidth ??
+            (typeof image.width === 'number'
+              ? image.width
+              : defaultBlurhashCanvasWidth)
           const height =
-            typeof heightInput === 'number'
-              ? heightInput
-              : defaultBlurhashCanvasHeight
+            image.canvasHeight ??
+            (typeof image.height === 'number'
+              ? image.height
+              : defaultBlurhashCanvasHeight)
 
           // decode hash
-          const pixels = decode(blurhash, width, height, punch)
+          const pixels = decode(
+            image.blurhash,
+            width,
+            height,
+            image.blurhashPunch ?? 1
+          )
 
           // use a temporary canvas to create a blob from the decoded pixels
           // TODO: Is there a mimetype to go straight to blob?

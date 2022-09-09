@@ -65,7 +65,7 @@ PharkasComponent&lt;StockChartComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:38](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L38)
+[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:38](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L38)
 
 ## Properties
 
@@ -113,7 +113,7 @@ dist/angular-pharkas/pharkas.component.d.ts:112
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:34](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L34)
+[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:34](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L34)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:29](https://github.com/WorldMaker/angular-pharkas/blob/fa47d6c/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L29)
+[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:29](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L29)
 
 ___
 

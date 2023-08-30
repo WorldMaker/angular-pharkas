@@ -577,17 +577,22 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       }
     }
     if (observables.length) {
-      const displayObservable = combineLatest([
-        concat(
-          of([false, false]),
-          this[pharkas].suspense.asObservable().pipe(pairwise())
-        ),
-        merge(...observables),
-      ]).pipe(
-        filter(
-          ([[lastSuspense, suspense]]) =>
-            !suspense || (lastSuspense && lastSuspense !== suspense)
-        ),
+      const merged = merge(...observables)
+      const suspensed = this[pharkas].suspenseBound
+        ? combineLatest([
+            concat(
+              of([false, false]),
+              this[pharkas].suspense.asObservable().pipe(pairwise())
+            ),
+            merged,
+          ]).pipe(
+            filter(
+              ([[lastSuspense, suspense]]) =>
+                !suspense || (lastSuspense && lastSuspense !== suspense)
+            )
+          )
+        : merged
+      const displayObservable = suspensed.pipe(
         debounceTime(0, animationFrameScheduler),
         share()
       )

@@ -17,6 +17,13 @@ import { scan } from 'rxjs/operators'
     [class.is-warning]="highlighted"
   >
     Hello {{ testDisplay }}
+    <progress
+      *ngIf="pharkasSuspense"
+      class="progress is-small is-primary"
+      max="100"
+    >
+      Updating
+    </progress>
   </div>`,
 })
 export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent> {
@@ -55,15 +62,18 @@ export class PharkasTestComponent extends PharkasComponent<PharkasTestComponent>
     const click = this.useCallback('handleClick')
     this.bindOutput(this.mickey, click)
 
+    const highlighted = click.pipe(scan((acc) => !acc, false as boolean))
+
     // Simple "state" logic to toggle a highlight on click
-    this.bind(
-      'highlighted',
-      click.pipe(scan((acc) => !acc, false as boolean)),
-      false
-    )
+    this.bind('highlighted', highlighted, false)
+
+    // Suspend while highlighted
+    this.bindSuspense(highlighted)
 
     // Dumb console log test of handleClick
     this.bindEffect(click, ([mouseEvent]) => console.log('clicked', mouseEvent))
+
+    // this.bindEffect(this.pharkasChangeNotifications, () => console.log('tick'))
 
     console.log(this)
   }

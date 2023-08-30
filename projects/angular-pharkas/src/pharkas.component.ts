@@ -10,14 +10,23 @@ import {
 import {
   animationFrameScheduler,
   BehaviorSubject,
+  combineLatest,
+  concat,
   isObservable,
   merge,
   Observable,
+  of,
   ReplaySubject,
   Subject,
   Subscription,
 } from 'rxjs'
-import { debounceTime, observeOn, share } from 'rxjs/operators'
+import {
+  debounceTime,
+  filter,
+  observeOn,
+  pairwise,
+  share,
+} from 'rxjs/operators'
 
 const subscription = Symbol('subscription')
 const props = Symbol('props')
@@ -52,6 +61,8 @@ interface PharkasMeta {
   changeSubject: Subject<void>
   templateError: BehaviorSubject<boolean>
   effectError: boolean
+  suspense: BehaviorSubject<boolean>
+  suspenseBound: boolean
 }
 
 function bindSubject<T>(observable: Observable<T>, subject: Subject<T>) {
@@ -112,6 +123,29 @@ function bindTemplateSubject<T>(
   })
 }
 
+function bindSuspense(observable: Observable<boolean>, meta: PharkasMeta) {
+  // Binding multiple suspense observables is probably a mistake, but the default
+  // merge behavior is probably good enough
+  if (meta.suspenseBound && isDevMode()) {
+    console.warn('Suspense already bound for component')
+  }
+  meta.suspenseBound = true
+  return observable.subscribe({
+    next: (value) => meta.suspense.next(value),
+    error: (err: any) => {
+      if (isDevMode()) {
+        console.warn(`Suspense binding error`, err)
+      }
+      meta.templateError.next(true)
+    },
+    complete: () => {
+      if (isDevMode()) {
+        console.warn('Suspense binding completed')
+      }
+    },
+  })
+}
+
 /**
  * Pharkas Base Component
  *
@@ -131,6 +165,8 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     changeSubject: new Subject<void>(),
     effectError: false,
     templateError: new BehaviorSubject<boolean>(false),
+    suspense: new BehaviorSubject<boolean>(false),
+    suspenseBound: false,
   }
 
   //#region *** Blinkenlights ***
@@ -160,6 +196,13 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
    */
   public get pharkasTemplateError() {
     return this[pharkas].templateError.value
+  }
+  /**
+   * Template change notifications are suspended for non-immediate bindings.
+   * (Observed from a `bindSuspense`.)
+   */
+  public get pharkasSuspense() {
+    return this[pharkas].suspense.value
   }
 
   //#endregion
@@ -365,6 +408,17 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
     } as PharkasProp<unknown>)
   }
 
+  /**
+   * Bind a suspense observable
+   *
+   * While this observable emits `true`, template change notifications will skipped
+   * for non-immediate bindings and the `pharkasSuspense` blinkenlight will be `true`.
+   * @param observable Suspense
+   */
+  protected bindSuspense(observable: Observable<boolean>) {
+    this[subscription].add(bindSuspense(observable, this[pharkas]))
+  }
+
   //#endregion
 
   /**
@@ -523,7 +577,17 @@ export class PharkasComponent<TViewModel> implements OnInit, OnDestroy {
       }
     }
     if (observables.length) {
-      const displayObservable = merge(...observables).pipe(
+      const displayObservable = combineLatest([
+        concat(
+          of([false, false]),
+          this[pharkas].suspense.asObservable().pipe(pairwise())
+        ),
+        merge(...observables),
+      ]).pipe(
+        filter(
+          ([[lastSuspense, suspense]]) =>
+            !suspense || (lastSuspense && lastSuspense !== suspense)
+        ),
         debounceTime(0, animationFrameScheduler),
         share()
       )

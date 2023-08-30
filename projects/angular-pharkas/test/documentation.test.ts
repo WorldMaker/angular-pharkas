@@ -124,6 +124,23 @@ describe('works as documented in README', () => {
     expect(exampleInstance.testDisplay).toEqual('Hello World')
   })
 
+  it('can have a suspense binding', () => {
+    class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
+      constructor(ref: ChangeDetectorRef) {
+        super(ref)
+
+        const suspense = of(true)
+
+        this.bindSuspense(suspense)
+      }
+    }
+    expect(MyExampleComponent).toBeDefined()
+
+    const exampleInstance = new MyExampleComponent(null!)
+    expect(exampleInstance).toBeTruthy()
+    expect(exampleInstance.pharkasSuspense).toBeTruthy()
+  })
+
   it('can define a callback', () => {
     class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
       // Type only, no implementation:

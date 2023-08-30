@@ -28,6 +28,7 @@
 - [pharkasChangeNotifications](angular_pharkas_highcharts.StockChartComponent.md#pharkaschangenotifications)
 - [pharkasEffectError](angular_pharkas_highcharts.StockChartComponent.md#pharkaseffecterror)
 - [pharkasError](angular_pharkas_highcharts.StockChartComponent.md#pharkaserror)
+- [pharkasSuspense](angular_pharkas_highcharts.StockChartComponent.md#pharkassuspense)
 - [pharkasTemplateError](angular_pharkas_highcharts.StockChartComponent.md#pharkastemplateerror)
 
 ### Methods
@@ -37,6 +38,7 @@
 - [bindImmediate](angular_pharkas_highcharts.StockChartComponent.md#bindimmediate)
 - [bindImmediateEffect](angular_pharkas_highcharts.StockChartComponent.md#bindimmediateeffect)
 - [bindOutput](angular_pharkas_highcharts.StockChartComponent.md#bindoutput)
+- [bindSuspense](angular_pharkas_highcharts.StockChartComponent.md#bindsuspense)
 - [bindable](angular_pharkas_highcharts.StockChartComponent.md#bindable)
 - [createCallback](angular_pharkas_highcharts.StockChartComponent.md#createcallback)
 - [ngOnDestroy](angular_pharkas_highcharts.StockChartComponent.md#ngondestroy)
@@ -65,7 +67,7 @@ PharkasComponent&lt;StockChartComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:38](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L38)
+[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:38](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L38)
 
 ## Properties
 
@@ -79,7 +81,7 @@ PharkasComponent.ɵcmp
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:113
+dist/angular-pharkas/pharkas.component.d.ts:126
 
 ___
 
@@ -93,7 +95,7 @@ PharkasComponent.ɵfac
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:112
+dist/angular-pharkas/pharkas.component.d.ts:125
 
 ## Accessors
 
@@ -113,7 +115,7 @@ dist/angular-pharkas/pharkas.component.d.ts:112
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:34](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L34)
+[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:34](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L34)
 
 ___
 
@@ -133,7 +135,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:29](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L29)
+[projects/angular-pharkas-highcharts/src/stock-chart.component.ts:29](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-highcharts/src/stock-chart.component.ts#L29)
 
 ___
 
@@ -199,6 +201,27 @@ dist/angular-pharkas/pharkas.component.d.ts:26
 
 ___
 
+### pharkasSuspense
+
+• `get` **pharkasSuspense**(): `boolean`
+
+Template change notifications are suspended for non-immediate bindings.
+(Observed from a `bindSuspense`.)
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+PharkasComponent.pharkasSuspense
+
+#### Defined in
+
+dist/angular-pharkas/pharkas.component.d.ts:40
+
+___
+
 ### pharkasTemplateError
 
 • `get` **pharkasTemplateError**(): `boolean`
@@ -252,7 +275,7 @@ PharkasComponent.bind
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:66
+dist/angular-pharkas/pharkas.component.d.ts:71
 
 ___
 
@@ -287,7 +310,7 @@ PharkasComponent.bindEffect
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:101
+dist/angular-pharkas/pharkas.component.d.ts:114
 
 ___
 
@@ -324,7 +347,7 @@ PharkasComponent.bindImmediate
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:75
+dist/angular-pharkas/pharkas.component.d.ts:80
 
 ___
 
@@ -359,7 +382,7 @@ PharkasComponent.bindImmediateEffect
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:109
+dist/angular-pharkas/pharkas.component.d.ts:122
 
 ___
 
@@ -392,7 +415,36 @@ PharkasComponent.bindOutput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:81
+dist/angular-pharkas/pharkas.component.d.ts:94
+
+___
+
+### bindSuspense
+
+▸ `Protected` **bindSuspense**(`observable`): `void`
+
+Bind a suspense observable
+
+While this observable emits `true`, template change notifications will skipped
+for non-immediate bindings and the `pharkasSuspense` blinkenlight will be `true`.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `observable` | `Observable`<`boolean`\> | Suspense |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+PharkasComponent.bindSuspense
+
+#### Defined in
+
+dist/angular-pharkas/pharkas.component.d.ts:88
 
 ___
 
@@ -426,7 +478,7 @@ PharkasComponent.bindable
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:57
+dist/angular-pharkas/pharkas.component.d.ts:62
 
 ___
 
@@ -462,7 +514,7 @@ PharkasComponent.createCallback
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:87
+dist/angular-pharkas/pharkas.component.d.ts:100
 
 ___
 
@@ -480,7 +532,7 @@ PharkasComponent.ngOnDestroy
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:111
+dist/angular-pharkas/pharkas.component.d.ts:124
 
 ___
 
@@ -498,7 +550,7 @@ PharkasComponent.ngOnInit
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:110
+dist/angular-pharkas/pharkas.component.d.ts:123
 
 ___
 
@@ -533,7 +585,7 @@ PharkasComponent.setInput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:44
+dist/angular-pharkas/pharkas.component.d.ts:49
 
 ___
 
@@ -569,7 +621,7 @@ PharkasComponent.useCallback
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:93
+dist/angular-pharkas/pharkas.component.d.ts:106
 
 ___
 
@@ -607,4 +659,4 @@ PharkasComponent.useInput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:51
+dist/angular-pharkas/pharkas.component.d.ts:56

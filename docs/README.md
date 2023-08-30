@@ -181,10 +181,42 @@ managing the DOM. (If you were to build a "push" alternative to Angular's Reacti
 for instance.) In such cases there are "Immediate" variants of bindings. You may not need them,
 and the defaults should do what you need in most cases.
 
-### Error Blinkenlights
+### Suspense
+
+A component may bind a suspense observable:
+
+```ts
+@Component({
+  // …
+})
+export class MyExampleComponent extends PharkasComponent<MyExampleComponent> {
+  constructor(ref: ChangeDetectorRef) {
+    super(ref)
+
+    // Build some observables…
+
+    this.bindSuspense(someSuspenseObservable)
+  }
+}
+```
+
+When this `Observable<boolean>` emits `true`, template change notifications are skipped for
+non-immediate template bindings until the next `false` is emitted. The `pharkasSuspense`
+blinkenlight reflects this suspense state.
+
+This may be useful for instance while a loading operation is taking place to display some
+simple loading indicator and reduce "UI bouncing" with intermediate states.
+
+Note that this only suspends normal change detection pushes. It will not entirely eliminate
+such "UI bouncing" as for instance an immediate binding will still trigger Angular change
+detection.
+
+### Blinkenlights
 
 Pharkas provides a set of blinkenlights (lights intended to blink a status) for very basic error
-status indication. These are "last chance error reporting" blinkenlights for generic error
+status indication or suspense states (such as loading).
+
+The error blinkenlights are "last chance error reporting" blinkenlights for generic error
 situations when any observable provided to `bind` or `bindEffect` or an "Immediate" variant of
 such has thrown an error.
 

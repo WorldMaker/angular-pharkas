@@ -32,6 +32,7 @@
 - [pharkasChangeNotifications](angular_pharkas_blurhash.BlurhashComponent.md#pharkaschangenotifications)
 - [pharkasEffectError](angular_pharkas_blurhash.BlurhashComponent.md#pharkaseffecterror)
 - [pharkasError](angular_pharkas_blurhash.BlurhashComponent.md#pharkaserror)
+- [pharkasSuspense](angular_pharkas_blurhash.BlurhashComponent.md#pharkassuspense)
 - [pharkasTemplateError](angular_pharkas_blurhash.BlurhashComponent.md#pharkastemplateerror)
 - [widthStyle](angular_pharkas_blurhash.BlurhashComponent.md#widthstyle)
 
@@ -42,6 +43,7 @@
 - [bindImmediate](angular_pharkas_blurhash.BlurhashComponent.md#bindimmediate)
 - [bindImmediateEffect](angular_pharkas_blurhash.BlurhashComponent.md#bindimmediateeffect)
 - [bindOutput](angular_pharkas_blurhash.BlurhashComponent.md#bindoutput)
+- [bindSuspense](angular_pharkas_blurhash.BlurhashComponent.md#bindsuspense)
 - [bindable](angular_pharkas_blurhash.BlurhashComponent.md#bindable)
 - [createCallback](angular_pharkas_blurhash.BlurhashComponent.md#createcallback)
 - [ngOnDestroy](angular_pharkas_blurhash.BlurhashComponent.md#ngondestroy)
@@ -68,7 +70,7 @@ PharkasComponent&lt;BlurhashComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L59)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L59)
 
 ## Properties
 
@@ -82,7 +84,7 @@ PharkasComponent.ɵcmp
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:113
+dist/angular-pharkas/pharkas.component.d.ts:126
 
 ___
 
@@ -96,7 +98,7 @@ PharkasComponent.ɵfac
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:112
+dist/angular-pharkas/pharkas.component.d.ts:125
 
 ## Accessors
 
@@ -110,7 +112,7 @@ dist/angular-pharkas/pharkas.component.d.ts:112
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:46](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L46)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:46](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L46)
 
 ___
 
@@ -124,7 +126,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:55](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L55)
 
 ___
 
@@ -138,7 +140,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:52](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L52)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:52](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L52)
 
 ___
 
@@ -158,7 +160,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:36](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L36)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:36](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L36)
 
 ___
 
@@ -172,7 +174,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:43](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L43)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:43](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L43)
 
 ___
 
@@ -186,7 +188,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:40](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L40)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:40](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L40)
 
 ___
 
@@ -252,6 +254,27 @@ dist/angular-pharkas/pharkas.component.d.ts:26
 
 ___
 
+### pharkasSuspense
+
+• `get` **pharkasSuspense**(): `boolean`
+
+Template change notifications are suspended for non-immediate bindings.
+(Observed from a `bindSuspense`.)
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+PharkasComponent.pharkasSuspense
+
+#### Defined in
+
+dist/angular-pharkas/pharkas.component.d.ts:40
+
+___
+
 ### pharkasTemplateError
 
 • `get` **pharkasTemplateError**(): `boolean`
@@ -282,7 +305,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-blurhash/src/blurhash.component.ts:49](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L49)
+[projects/angular-pharkas-blurhash/src/blurhash.component.ts:49](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-blurhash/src/blurhash.component.ts#L49)
 
 ## Methods
 
@@ -319,7 +342,7 @@ PharkasComponent.bind
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:66
+dist/angular-pharkas/pharkas.component.d.ts:71
 
 ___
 
@@ -354,7 +377,7 @@ PharkasComponent.bindEffect
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:101
+dist/angular-pharkas/pharkas.component.d.ts:114
 
 ___
 
@@ -391,7 +414,7 @@ PharkasComponent.bindImmediate
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:75
+dist/angular-pharkas/pharkas.component.d.ts:80
 
 ___
 
@@ -426,7 +449,7 @@ PharkasComponent.bindImmediateEffect
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:109
+dist/angular-pharkas/pharkas.component.d.ts:122
 
 ___
 
@@ -459,7 +482,36 @@ PharkasComponent.bindOutput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:81
+dist/angular-pharkas/pharkas.component.d.ts:94
+
+___
+
+### bindSuspense
+
+▸ `Protected` **bindSuspense**(`observable`): `void`
+
+Bind a suspense observable
+
+While this observable emits `true`, template change notifications will skipped
+for non-immediate bindings and the `pharkasSuspense` blinkenlight will be `true`.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `observable` | `Observable`<`boolean`\> | Suspense |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+PharkasComponent.bindSuspense
+
+#### Defined in
+
+dist/angular-pharkas/pharkas.component.d.ts:88
 
 ___
 
@@ -493,7 +545,7 @@ PharkasComponent.bindable
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:57
+dist/angular-pharkas/pharkas.component.d.ts:62
 
 ___
 
@@ -529,7 +581,7 @@ PharkasComponent.createCallback
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:87
+dist/angular-pharkas/pharkas.component.d.ts:100
 
 ___
 
@@ -547,7 +599,7 @@ PharkasComponent.ngOnDestroy
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:111
+dist/angular-pharkas/pharkas.component.d.ts:124
 
 ___
 
@@ -565,7 +617,7 @@ PharkasComponent.ngOnInit
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:110
+dist/angular-pharkas/pharkas.component.d.ts:123
 
 ___
 
@@ -600,7 +652,7 @@ PharkasComponent.setInput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:44
+dist/angular-pharkas/pharkas.component.d.ts:49
 
 ___
 
@@ -636,7 +688,7 @@ PharkasComponent.useCallback
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:93
+dist/angular-pharkas/pharkas.component.d.ts:106
 
 ___
 
@@ -674,4 +726,4 @@ PharkasComponent.useInput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:51
+dist/angular-pharkas/pharkas.component.d.ts:56

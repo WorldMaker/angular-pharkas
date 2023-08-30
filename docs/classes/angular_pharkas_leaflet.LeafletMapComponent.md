@@ -35,6 +35,7 @@ Pharkas Base Component for building Leaflet Maps
 - [pharkasChangeNotifications](angular_pharkas_leaflet.LeafletMapComponent.md#pharkaschangenotifications)
 - [pharkasEffectError](angular_pharkas_leaflet.LeafletMapComponent.md#pharkaseffecterror)
 - [pharkasError](angular_pharkas_leaflet.LeafletMapComponent.md#pharkaserror)
+- [pharkasSuspense](angular_pharkas_leaflet.LeafletMapComponent.md#pharkassuspense)
 - [pharkasTemplateError](angular_pharkas_leaflet.LeafletMapComponent.md#pharkastemplateerror)
 
 ### Methods
@@ -44,6 +45,7 @@ Pharkas Base Component for building Leaflet Maps
 - [bindImmediate](angular_pharkas_leaflet.LeafletMapComponent.md#bindimmediate)
 - [bindImmediateEffect](angular_pharkas_leaflet.LeafletMapComponent.md#bindimmediateeffect)
 - [bindOutput](angular_pharkas_leaflet.LeafletMapComponent.md#bindoutput)
+- [bindSuspense](angular_pharkas_leaflet.LeafletMapComponent.md#bindsuspense)
 - [bindable](angular_pharkas_leaflet.LeafletMapComponent.md#bindable)
 - [createCallback](angular_pharkas_leaflet.LeafletMapComponent.md#createcallback)
 - [ngOnDestroy](angular_pharkas_leaflet.LeafletMapComponent.md#ngondestroy)
@@ -78,7 +80,7 @@ PharkasComponent&lt;TViewModel\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:31](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L31)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:31](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L31)
 
 ## Properties
 
@@ -102,7 +104,7 @@ PharkasComponent&lt;TViewModel\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:27](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L27)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:27](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L27)
 
 ___
 
@@ -116,7 +118,7 @@ PharkasComponent.ɵcmp
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:113
+dist/angular-pharkas/pharkas.component.d.ts:126
 
 ___
 
@@ -130,7 +132,7 @@ PharkasComponent.ɵfac
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:112
+dist/angular-pharkas/pharkas.component.d.ts:125
 
 ## Accessors
 
@@ -196,6 +198,27 @@ dist/angular-pharkas/pharkas.component.d.ts:26
 
 ___
 
+### pharkasSuspense
+
+• `get` **pharkasSuspense**(): `boolean`
+
+Template change notifications are suspended for non-immediate bindings.
+(Observed from a `bindSuspense`.)
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+PharkasComponent.pharkasSuspense
+
+#### Defined in
+
+dist/angular-pharkas/pharkas.component.d.ts:40
+
+___
+
 ### pharkasTemplateError
 
 • `get` **pharkasTemplateError**(): `boolean`
@@ -249,7 +272,7 @@ PharkasComponent.bind
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:66
+dist/angular-pharkas/pharkas.component.d.ts:71
 
 ___
 
@@ -284,7 +307,7 @@ PharkasComponent.bindEffect
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:101
+dist/angular-pharkas/pharkas.component.d.ts:114
 
 ___
 
@@ -321,7 +344,7 @@ PharkasComponent.bindImmediate
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:75
+dist/angular-pharkas/pharkas.component.d.ts:80
 
 ___
 
@@ -356,7 +379,7 @@ PharkasComponent.bindImmediateEffect
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:109
+dist/angular-pharkas/pharkas.component.d.ts:122
 
 ___
 
@@ -389,7 +412,36 @@ PharkasComponent.bindOutput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:81
+dist/angular-pharkas/pharkas.component.d.ts:94
+
+___
+
+### bindSuspense
+
+▸ `Protected` **bindSuspense**(`observable`): `void`
+
+Bind a suspense observable
+
+While this observable emits `true`, template change notifications will skipped
+for non-immediate bindings and the `pharkasSuspense` blinkenlight will be `true`.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `observable` | `Observable`<`boolean`\> | Suspense |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+PharkasComponent.bindSuspense
+
+#### Defined in
+
+dist/angular-pharkas/pharkas.component.d.ts:88
 
 ___
 
@@ -423,7 +475,7 @@ PharkasComponent.bindable
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:57
+dist/angular-pharkas/pharkas.component.d.ts:62
 
 ___
 
@@ -459,7 +511,7 @@ PharkasComponent.createCallback
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:87
+dist/angular-pharkas/pharkas.component.d.ts:100
 
 ___
 
@@ -477,7 +529,7 @@ PharkasComponent.ngOnDestroy
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:111
+dist/angular-pharkas/pharkas.component.d.ts:124
 
 ___
 
@@ -495,7 +547,7 @@ PharkasComponent.ngOnInit
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:110
+dist/angular-pharkas/pharkas.component.d.ts:123
 
 ___
 
@@ -530,7 +582,7 @@ PharkasComponent.setInput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:44
+dist/angular-pharkas/pharkas.component.d.ts:49
 
 ___
 
@@ -566,7 +618,7 @@ PharkasComponent.useCallback
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:93
+dist/angular-pharkas/pharkas.component.d.ts:106
 
 ___
 
@@ -604,7 +656,7 @@ PharkasComponent.useInput
 
 #### Defined in
 
-dist/angular-pharkas/pharkas.component.d.ts:51
+dist/angular-pharkas/pharkas.component.d.ts:56
 
 ___
 
@@ -628,4 +680,4 @@ Observable of Leaflet Map
 
 #### Defined in
 
-[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/e26c269/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L59)
+[projects/angular-pharkas-leaflet/src/leaflet-map.component.ts:59](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-leaflet/src/leaflet-map.component.ts#L59)

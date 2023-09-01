@@ -1,4 +1,4 @@
-import 'jest-preset-angular/setup-jest'
+import 'jest-preset-angular/setup-jest.mjs'
 
 /* global mocks for jsdom */
 const mock = () => {

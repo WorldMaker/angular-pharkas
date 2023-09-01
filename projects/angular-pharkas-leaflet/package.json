@@ -1,10 +1,10 @@
 {
   "name": "angular-pharkas-leaflet",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0",
-    "angular-pharkas": "~5.2.0",
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0",
+    "angular-pharkas": "~7.0.0",
     "leaflet": "^1.8.0",
     "rxjs-spy": "^7.5.3"
   },

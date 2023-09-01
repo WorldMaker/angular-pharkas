@@ -16,6 +16,13 @@ It's key benefits are:
   - Uses `ResizeObserver` to watch container size changes and notifies Highcharts, which is useful
     for smarter updating in complex reflowing CSS layouts such as CSS Grid
 
+## The Inevitable Angular Compatibility Chart
+
+| Library version | Supported Angular |
+| --------------- | ----------------- |
+| 3.0.0           | Angular 15        |
+| <=2.0.1         | Angular 13        |
+
 ## Usage
 
 Import `PharkasHighchartsModule` and use either `<pharkas-chart>` or `<pharkas-stockchart>` components

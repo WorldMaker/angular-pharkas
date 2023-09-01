@@ -234,6 +234,5 @@
         }
       }
     }
-  },
-  "defaultProject": "test-app"
+  }
 }

@@ -1,6 +1,5 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  // ---entryPointStrategy packages projects/* --cleanOutputDir false --excludePrivate
   "plugin": ["typedoc-plugin-markdown"],
   "out": "./docs",
   "readme": "./projects/angular-pharkas/README.md",

@@ -28,6 +28,7 @@ It is inspired by ReactiveUI (.NET), the Hooks of React, and rx-angular, but it 
 
 | Pharkas version | Supported Angular |
 | --------------- | ----------------- |
+| 7.0.0           | Angular 15        |
 | 4.0.0           | Angular 13        |
 | <=3.0.0         | Angular 11        |
 

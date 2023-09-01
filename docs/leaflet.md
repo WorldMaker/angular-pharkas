@@ -15,6 +15,13 @@ It's benefits are:
   - Uses `ResizeObserver` to watch container size changes and notifies Leaflet, which is useful
     for smarter updating in complex reflowing CSS layouts such as CSS Grid
 
+## The Inevitable Angular Compatibility Chart
+
+| Library version | Supported Angular |
+| --------------- | ----------------- |
+| 3.0.0           | Angular 15        |
+| <=2.0.0         | Angular 13        |
+
 ## Usage
 
 Import `PharkasLeafletModule` and use `LeafletMapComponent` as a replacement base component like

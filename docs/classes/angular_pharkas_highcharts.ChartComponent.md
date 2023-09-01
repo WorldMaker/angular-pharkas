@@ -67,7 +67,7 @@ PharkasComponent&lt;ChartComponent\&gt;.constructor
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/chart.component.ts:30](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-highcharts/src/chart.component.ts#L30)
+[projects/angular-pharkas-highcharts/src/chart.component.ts:30](https://github.com/WorldMaker/angular-pharkas/blob/0d50a82/projects/angular-pharkas-highcharts/src/chart.component.ts#L30)
 
 ## Properties
 
@@ -115,7 +115,7 @@ dist/angular-pharkas/pharkas.component.d.ts:125
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/chart.component.ts:26](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-highcharts/src/chart.component.ts#L26)
+[projects/angular-pharkas-highcharts/src/chart.component.ts:26](https://github.com/WorldMaker/angular-pharkas/blob/0d50a82/projects/angular-pharkas-highcharts/src/chart.component.ts#L26)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-[projects/angular-pharkas-highcharts/src/chart.component.ts:23](https://github.com/WorldMaker/angular-pharkas/blob/f7dbe9c/projects/angular-pharkas-highcharts/src/chart.component.ts#L23)
+[projects/angular-pharkas-highcharts/src/chart.component.ts:23](https://github.com/WorldMaker/angular-pharkas/blob/0d50a82/projects/angular-pharkas-highcharts/src/chart.component.ts#L23)
 
 ___
 

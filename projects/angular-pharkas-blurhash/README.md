@@ -9,6 +9,13 @@ It's key benefits are:
 - Zone-Free
   - `ChangeDetectionStrategy.OnPush` tells Angular that it doesn't need to work to detect any template changes
 
+## The Inevitable Angular Compatibility Chart
+
+| Library version | Supported Angular |
+| --------------- | ----------------- |
+| 2.0.0           | Angular 15        |
+| <=1.0.0         | Angular 13        |
+
 ## Usage
 
 Import `PharkasBlurhashModule` and use `<pharkas-blurhash>`. The API:

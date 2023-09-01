@@ -9,7 +9,7 @@
     "build:lib:blurhash": "ng build --configuration=production angular-pharkas-blurhash",
     "build:lib:highcharts": "ng build --configuration=production angular-pharkas-highcharts",
     "build:lib:leaflet": "ng build --configuration=production angular-pharkas-leaflet",
-    "typedoc:md": "typedoc --plugin typedoc-plugin-markdown --out docs --readme projects/angular-pharkas/README.md --entryPointStrategy packages projects/* --cleanOutputDir false --excludePrivate",
+    "typedoc": "typedoc",
     "prettier": "prettier -w .",
     "prettier:check": "prettier --check .",
     "test": "ng test",

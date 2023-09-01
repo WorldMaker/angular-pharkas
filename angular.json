@@ -29,9 +29,7 @@
               "projects/test-app/src/favicon.ico",
               "projects/test-app/src/assets"
             ],
-            "styles": [
-              "projects/test-app/src/styles.scss"
-            ],
+            "styles": ["projects/test-app/src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -96,9 +94,7 @@
               "projects/test-app/src/favicon.ico",
               "projects/test-app/assets"
             ],
-            "styles": [
-              "projects/test-app/src/styles.scss"
-            ],
+            "styles": ["projects/test-app/src/styles.scss"],
             "scripts": []
           }
         },

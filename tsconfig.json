@@ -7,9 +7,7 @@
         "dist/angular-pharkas/angular-pharkas",
         "dist/angular-pharkas"
       ],
-      "angular-pharkas/*": [
-        "dist/angular-pharkas/*"
-      ],
+      "angular-pharkas/*": ["dist/angular-pharkas/*"],
       "angular-pharkas-blurhash": [
         "dist/angular-pharkas-blurhash/angular-pharkas-blurhash",
         "dist/angular-pharkas-blurhash"
@@ -37,10 +35,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

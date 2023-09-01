@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration=production",
+    "build": "ng build --configuration=production test-app",
     "build:lib": "ng build --configuration=production angular-pharkas",
     "build:lib:blurhash": "ng build --configuration=production angular-pharkas-blurhash",
     "build:lib:highcharts": "ng build --configuration=production angular-pharkas-highcharts",

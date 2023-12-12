@@ -20,6 +20,9 @@ The `angular-pharkas` library is a wild, frontier pharmacist approach to buildin
 
 It is inspired by ReactiveUI (.NET), the Hooks of React, and rx-angular, but it is also none of those.
 
+If you enjoy writing Pharkas components and are looking to expand outside of Angular, consider
+[Butterfloat](https://worldmaker.net/butterfloat/).
+
 I hate Angular and this library is my attempt to corral Angular into something honest, performant, and useful to work in. A lot of the
 boilerplate here (versus say React Hooks) is entirely Angular's fault because it uses experimental decorators (which it shouldn't) and
 because it does all that "compile-time" reflection and hates meta-programming. I've tried my best to keep the boilerplate and the type
